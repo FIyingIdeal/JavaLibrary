@@ -33,7 +33,7 @@ public class OptionalTest {
 
     @Test
     public void lambdaTest() {
-        List<Integer> list = Arrays.asList(1,4,6,2,5,9,34,21);
+        List<Integer> list = Arrays.asList(1, 4, 6, 2, 5, 9, 34, 21);
         List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
         Collections.sort(names, (String a, String b) -> b.compareTo(a));
         Collections.sort(list, (a, b) -> a-b);

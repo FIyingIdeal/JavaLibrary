@@ -12,8 +12,8 @@ public class StreamTest {
 
     @Test
     public void test() {
-        List<Integer> nums = Arrays.asList(1,1,null,
-                2,3,4,5,6,null,7,8,9,10);
+        List<Integer> nums = Arrays.asList(1, 1, null,
+                2, 3, 4, 5, 6, null, 7, 8, 9, 10);
         System.out.println(
                 nums.stream().filter(num -> num != null).distinct()
                         .mapToInt(num -> num * 2).peek(System.out::println)

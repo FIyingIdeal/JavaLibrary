@@ -1,4 +1,4 @@
-package reflect;
+package test.java.lang.reflect;
 
 import org.junit.Test;
 
@@ -25,8 +25,8 @@ public class UserReflectTest {
     @Test
     public void getPackageAndClassName() {
         User user = new User();
-        println(user.getClass().getPackage().getName()); //reflect
-        println(user.getClass().getName());              //reflect.User
+        println(user.getClass().getPackage().getName()); //java.lang.reflect
+        println(user.getClass().getName());              //User
         println(user.getClass().getSimpleName());        //User
     }
 
@@ -38,13 +38,13 @@ public class UserReflectTest {
         Class<?> clazz3 = null;
 
         try {
-            clazz1 = Class.forName("reflect.User");
+            clazz1 = Class.forName("User");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         clazz2 = new User().getClass();
         clazz3 = User.class;
-        println(clazz1.getName());  //reflect.User
+        println(clazz1.getName());  //User
         println(clazz2.getName());
         println(clazz3.getName());
     }

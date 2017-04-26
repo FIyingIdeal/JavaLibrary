@@ -2,7 +2,10 @@ package test.java.util;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Administrator on 2017/2/16.

@@ -1,4 +1,4 @@
-package reflect;
+package test.java.lang.reflect;
 
 /**
  * Created by Administrator on 2017/3/3.

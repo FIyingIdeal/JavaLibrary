@@ -1,8 +1,5 @@
 package test.java.lang.ThreadTest.productorConsumer;
 
-import test.java.lang.ThreadTest.productorConsumer.Consumer;
-import test.java.lang.ThreadTest.productorConsumer.Producer;
-
 import java.util.LinkedList;
 import java.util.Queue;
 

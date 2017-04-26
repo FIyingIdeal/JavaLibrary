@@ -2,11 +2,12 @@ package test.java.io;
 
 import org.junit.Test;
 import test.java.io.bean.Child;
-import test.java.io.bean.Family;
 import test.java.io.bean.Parent;
 import test.java.io.bean.Player;
 
 import java.io.*;
+
+import test.java.io.bean.Family;
 
 /**
  * Created by Administrator on 2017/2/6.

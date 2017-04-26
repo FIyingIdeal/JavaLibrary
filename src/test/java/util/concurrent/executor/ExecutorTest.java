@@ -2,7 +2,6 @@ package test.java.util.concurrent.executor;
 
 import org.junit.Test;
 
-import java.sql.Driver;
 import java.util.concurrent.*;
 
 /**

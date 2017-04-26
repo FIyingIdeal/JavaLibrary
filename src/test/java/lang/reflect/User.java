@@ -1,4 +1,4 @@
-package reflect;
+package test.java.lang.reflect;
 
 import java.io.Serializable;
 
