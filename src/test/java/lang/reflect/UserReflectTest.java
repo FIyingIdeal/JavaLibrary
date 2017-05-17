@@ -26,7 +26,7 @@ public class UserReflectTest {
     public void getPackageAndClassName() {
         User user = new User();
         println(user.getClass().getPackage().getName()); //java.lang.reflect
-        println(user.getClass().getName());              //User
+        println(user.getClass().getName());              //test.java.lang.reflect.User
         println(user.getClass().getSimpleName());        //User
     }
 
@@ -109,7 +109,7 @@ public class UserReflectTest {
     public void getFields() {
         Class<?> clazz = User.class;
         //获取所有申明（private  protected  public）的属性
-        //可以获取到本身类或实现接口中的Fields，但获取不到父类中的Fields
+        //可以获取到本身类或实现接口中的Fields，但获取不到父类中的Fields(包括父类的public方法 也获取不到)
         Field[] fields = clazz.getDeclaredFields();
         //获取public属性,是一个类的话返回本身和父类中的public属性
         Field[] fields1 = clazz.getFields();
@@ -203,6 +203,7 @@ public class UserReflectTest {
             User user = (User)clazz.newInstance();
             field = clazz.getDeclaredField("userName");
             field.setAccessible(true);
+            //field的set与get方法不依赖于该field的setter/getter方法
             field.set(user, "yan");
             println(field.get(user).toString());
         } catch (NoSuchFieldException e) {
