@@ -1,7 +1,7 @@
-package keyworld.volatileTest;
+package keyword.volatileTest;
 
-import keyworld.volatileTest.counter.NormalCounter;
-import keyworld.volatileTest.counter.VolatileCounter;
+import keyword.volatileTest.counter.NormalCounter;
+import keyword.volatileTest.counter.VolatileCounter;
 import org.junit.Test;
 
 /**

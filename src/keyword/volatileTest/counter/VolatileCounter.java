@@ -1,11 +1,11 @@
-package keyworld.volatileTest.counter;
+package keyword.volatileTest.counter;
 
 /**
  * Created by Administrator on 2017/2/7.
  */
-public class NormalCounter {
+public class VolatileCounter {
 
-    public static int count = 0;
+    public volatile static int count = 0;
 
     public static void inc() {
         try {
