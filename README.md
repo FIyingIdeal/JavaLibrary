@@ -4,16 +4,21 @@
 代码目录说明：
 
 1. keyword ：java关键字的测试；
-2. test ： 该包是为了避免与jdk包结构冲突而添加的最外层包，内部是遵循jdk包结构进行分包的，但有一些例外（后期会进行优化）；
 
-   test.barcode : 生成二维码的测试；
+2. test ： 该包是为了避免与jdk包结构冲突而添加的最外层包，内部是遵循jdk包结构进行分包的，但有一些例外（后期会进行优化）；
+   
+   test.barcode : 生成二维码的测试；
    
    test.java.initTest : java类初始化顺序的测试，如静态代码块、动态代码块及构造函数的执行顺序等；
    
    test.java.InnerClassTest : 针对内部类（静态内部类、非静态内部类）的测试；
+   
 3. lambda : java8的重要特性 -- lambda表达式的测试；
+
 4. streamtest : 同样是java8的重要特性 -- Stream相关测试；
+
 5. trywithresource : jdk1.7开始支持的新的异常处理机制，简单说就是try-catch-finally的智能简化
+
 6. ...其他包待定
 
 运行说明：
