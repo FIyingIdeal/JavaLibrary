@@ -1,5 +1,7 @@
 package streamtest;
 
+import org.junit.Test;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,23 +15,6 @@ import java.util.stream.Stream;
  * Created by Administrator on 2016/1/12.
  */
 public class StreamTest {
-    public static void main(String[] args) {
-        StreamTest sc = new StreamTest();
-        sc.sort();
-        sc.distinct();
-        sc.skip();
-        sc.map();
-        sc.flatMap();
-        sc.filter();
-        sc.reduce();
-        sc.short_circuiting();
-        sc.IOToStream();
-        sc.distinctAndSort();
-        sc.match();
-        sc.iterate();
-        sc.CollectorsGroupingBy();
-        sc.compare();
-    }
 
     //int[] to Stream
     public IntStream getIntStream() {
@@ -47,6 +32,7 @@ public class StreamTest {
         Tool.newLine();
     }
 
+    @Test
     public void sort() {
         Tool.println("sort : ");
         //sort by default rule
@@ -57,18 +43,21 @@ public class StreamTest {
         Tool.newLine();
     }
 
+    @Test
     public void distinct() {
         Tool.println("distinct : ");
         getIntStream().distinct().forEach(System.out::print);
         Tool.newLine();
     }
 
+    @Test
     public void skip() {
         Tool.println("skip : ");
         getIntStream().skip(2).forEach(System.out::print);
         Tool.newLine();
     }
 
+    @Test
     public void map() {
         Tool.println("map : ");
         //List to stream
@@ -83,6 +72,7 @@ public class StreamTest {
     }
 
     //flatMap 把 input Stream 中的层级结构扁平化，就是将最底层元素抽出来放到一起，最终 output 的新 Stream 里面已经没有 List 了，都是直接的数字。
+    @Test
     public void flatMap() {
         Tool.println("flatMap : ");
         Stream<List<Integer>> inputStream = Stream.of(
@@ -97,6 +87,7 @@ public class StreamTest {
         Tool.newLine();
     }
 
+    @Test
     public void filter() {
         Tool.println("filter : ");
         getIntStream().filter(n -> n % 2 == 0).forEach(System.out::print);
@@ -104,8 +95,12 @@ public class StreamTest {
 
         Integer[] array = {1,23,3,4,5,6};
         Integer[] event = Stream.of(array).filter(n -> n%2==0).toArray(Integer[]::new);
+        Stream.of(array).forEach(item -> System.out.print(item + " "));
+        Tool.newLine();
+        Stream.of(event).forEach(System.out::print);
     }
 
+    @Test
     public void reduce() {
         Tool.println("reduce : ");
         String concat = Stream.of("a","b","c","d").reduce("", String::concat);
@@ -129,7 +124,7 @@ public class StreamTest {
         public String name;
         public Person(){}
         public Person(int num, String name) {
-            Tool.print("Create Person" + num);
+            Tool.println("Create Person" + num);
             this.num = num;
             this.name = name;
         }
@@ -148,6 +143,7 @@ public class StreamTest {
         }
     }
 
+    @Test
     public void short_circuiting() {
         Tool.println("short_circuiting : ");
         Person[] persons = new Person[10];
@@ -160,10 +156,13 @@ public class StreamTest {
         Tool.println(nameList);
 
         //在使用了sorted操作以后，limit/skip操作无法达到short-circuiting的目的
-        List<Person> personList = Stream.of(persons).sorted((p1, p2) -> {return p1.getName().compareTo(p2.getName());}).limit(2).collect(Collectors.toList());
+        List<Person> personList = Stream.of(persons).sorted((p1, p2) -> {
+            return p1.getName().compareTo(p2.getName());
+        }).limit(2).collect(Collectors.toList());
         personList.forEach(p -> Tool.println("    " + p.getName()));
     }
 
+    @Test
     public void IOToStream() {
         Tool.println("IOToStream : 文件最长一行的长度 ");
         try {
@@ -194,6 +193,7 @@ public class StreamTest {
         }
     }
 
+    @Test
     public void match() {
         Tool.println("match : ");
         Tool.println("allMatch(全部匹配返回true) => " + getIntStream().allMatch(n -> n > 5));
@@ -201,32 +201,43 @@ public class StreamTest {
         Tool.println("noneMatch(全部不匹配返回true) => " + getIntStream().noneMatch(n -> n > 7));
     }
 
+    @Test
     public void iterate() {
         Tool.println("Stream.iterate() : ");
         Stream.iterate(0, n -> n + 3).limit(10).forEach(n -> Tool.print(n + " "));
         Tool.newLine();
     }
 
+    @Test
     public void CollectorsGroupingBy() {
         Tool.println("CollectorsGroupingBy : ");
         List<Person> persons = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            persons.add(new Person(i, "name"+i));
+            persons.add(new Person(i, "name" + i));
         }
         persons.get(2).setName("name1");
         persons.get(3).setName("name1");
         Map<String, List<Person>> personMap = persons.stream().collect(Collectors.groupingBy(Person::getName));
-        for (Map.Entry<String, List<Person>> person : personMap.entrySet()) {
-            Tool.println(person.getKey() + " = " + person.getValue().size());
-        }
+        personMap.forEach((k, v) -> {
+            Tool.printInNewLine(k, "=");
+            v.stream().map(Person::getName).forEach(name -> Tool.print(name, " "));
+        });
+
+        Tool.newLine();
+        Map<String, Long> personGroupingCount = persons.stream().collect(Collectors.groupingBy(Person::getName, Collectors.counting()));
+        personGroupingCount.forEach((k, v) -> {
+            System.out.println(k + " = " + v);
+        });
     }
 
+    @Test
     public void compare() {
         Tool.println("Compare : 多条件组合排序");
         List<Person> persons = new ArrayList<Person>();
         persons.add(new Person(1, "name1"));
         persons.add(new Person(2, "name3"));
         persons.add(new Person(5, "name2"));
+        persons.add(new Person(3, "name2"));
         persons.sort(Comparator.comparing(Person::getName).thenComparing(Person::getNum));
         persons.forEach(person -> Tool.println(person.getName() + ", " + person.getNum()));
     }

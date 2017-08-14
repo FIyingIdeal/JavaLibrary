@@ -2,11 +2,16 @@ package test.java.time;
 
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/2/21.
@@ -29,6 +34,18 @@ public class LocalDateTimeTest {
         System.out.println(time);
     }
 
+    //parse方法将String转化为LocalDateTime对时间字符串是有一定限制的，日期和时间之间要有一个T
+    //但parse有重载的方法
+    @Test
+    public void parseWithDateTimeFormatter() {
+        String dateTimeStr = "2017-08-02 13:38:19";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime time = LocalDateTime.parse(dateTimeStr, formatter);
+        int day = 2;
+        LocalDateTime yesterday = time.plusDays(-day);
+        System.out.println(yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+    }
+
     @Test
     public void plus() {
         LocalDateTime time = LocalDateTime.now();
@@ -47,5 +64,16 @@ public class LocalDateTimeTest {
         LocalDateTime dateTime = LocalDateTime.now();
         LocalTime time = dateTime.toLocalTime();
         System.out.println(time);
+    }
+
+    /**
+     * 使用{@link Timestamp#valueOf(LocalDateTime)}将LocalDateTime转换为Timestamp
+     * 在与数据库交互的时候会很有帮助，直接传递Timestamp，而不用在数据库与代码之间不断转换进行String与Timestamp的转换，另参考{@link java.sql.Types}
+     */
+    @Test
+    public void toTimestamp() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(localDateTime);
+        System.out.println(timestamp);
     }
 }
