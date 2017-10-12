@@ -1,4 +1,4 @@
-package test.java.util.generic;
+package test.java.util.generic.dependence;
 
 /**
  * Created by Administrator on 2017/3/14.

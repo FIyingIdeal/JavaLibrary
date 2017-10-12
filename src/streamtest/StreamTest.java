@@ -65,7 +65,9 @@ public class StreamTest {
         worldList.add("hello world");
         worldList.add("java");
         worldList.add("c");
-        worldList.stream().map(String::toUpperCase).forEach(System.out::print);
+        //worldList.stream().map(String::toUpperCase).forEach(System.out::print);
+        List<String> upperCaseWorldList = worldList.stream().map(String::toUpperCase).collect(Collectors.toList());
+        System.out.println(upperCaseWorldList);
         Tool.newLine();
         getIntStream().map(n -> n * n).forEach(System.out::print);
         Tool.newLine();

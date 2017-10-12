@@ -3,17 +3,30 @@ package test.java.util;
 import org.junit.Test;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 /**
  * Created by Administrator on 2017/5/16.
  */
-public class PropertiesTest1 {
+public class PropertiesTest {
 
-    private String propertiesFile = "default.properties";
-    private String path = "E:/IDEAWorkspace/Java8/src/test/java/util/default.properties";
+    private static final String propertiesFile = "default.properties";
+    private static final String path = "E:/IDEAWorkspace/Java8/src/test/java/util/default.properties";
+    private static Properties properties;
 
-    public Properties load(String ...propertiesFiles) {
+    static {
+        properties = new Properties();
+        InputStream is = PropertiesTest.class.getResourceAsStream(propertiesFile);
+        try {
+            properties.load(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*public Properties load(String ...propertiesFiles) {
 
         if (propertiesFiles.length > 0) {
             propertiesFile = propertiesFiles[0];
@@ -28,7 +41,7 @@ public class PropertiesTest1 {
             e.printStackTrace();
         }
         return properties;
-    }
+    }*/
 
     @Test
     public void readJVM() {
@@ -40,7 +53,7 @@ public class PropertiesTest1 {
 
     @Test
     public void getProperty() {
-        Properties properties = load();
+        //Properties properties = load();
         System.out.println(properties.getProperty("username"));
         System.out.println(properties.getProperty("password"));
     }
@@ -48,26 +61,30 @@ public class PropertiesTest1 {
     //setProperty方法只是在内存中将k-v对保存，而没有将其写入properties文件中,写入文件请参照store
     @Test
     public void setProperty() {
-        Properties properties = load();
+        //Properties properties = load();
         properties.setProperty("rememberme", "true");
         System.out.println(properties.getProperty("rememberme"));   //true
-        properties = load();
+        //properties = load();
         System.out.println(properties.getProperty("rememberme"));   //null
     }
 
     @Test
     public void store() {
-        Properties properties = load();
-        properties.setProperty("store", "false");
+        //Properties properties = load();
+        properties.setProperty("store", "true");
         try {
             OutputStream os = new BufferedOutputStream(new FileOutputStream(path));
+            URL url = Properties.class.getResource(propertiesFile);
+            System.out.println(url.toURI());
+            //File file = new File();
+            //System.out.println(file.getAbsolutePath());
             properties.store(os, "add store");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        properties = load();
+        } catch (URISyntaxException e) {}
+        //properties = load();
         System.out.println(properties.getProperty("store"));
     }
 }
