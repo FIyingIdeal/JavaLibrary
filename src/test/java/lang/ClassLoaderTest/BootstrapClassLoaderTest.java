@@ -28,3 +28,14 @@ public class BootstrapClassLoaderTest {
         }
     }
 }
+/**
+ * 结果：
+ *      file:/C:/Program%20Files/Java/jdk1.8.0_66/jre/lib/resources.jar
+ *      file:/C:/Program%20Files/Java/jdk1.8.0_66/jre/lib/rt.jar
+ *      file:/C:/Program%20Files/Java/jdk1.8.0_66/jre/lib/sunrsasign.jar
+ *      file:/C:/Program%20Files/Java/jdk1.8.0_66/jre/lib/jsse.jar
+ *      file:/C:/Program%20Files/Java/jdk1.8.0_66/jre/lib/jce.jar
+ *      file:/C:/Program%20Files/Java/jdk1.8.0_66/jre/lib/charsets.jar
+ *      file:/C:/Program%20Files/Java/jdk1.8.0_66/jre/lib/jfr.jar
+ *      file:/C:/Program%20Files/Java/jdk1.8.0_66/jre/classes
+ */

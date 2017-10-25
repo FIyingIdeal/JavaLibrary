@@ -18,7 +18,12 @@ public class LoadInitTest {
     //static的属性，属于类的属性，所以在加载类的时候就会先得到执行，而static属性/代码块的执行顺序取决于其定义的先后
     private static InitTest staticInitTest = new InitTest("static/class Field");
 
+    private static int a = 99;
+
     static {
+        //定义在静态代码块之前的类变量的赋值先于静态代码块的执行
+        //因为 <clinit> 方法使用编译器自动收集类中的所有类变量的赋值动作和静态语句块中的语句合并而成，编译器收集的顺序是由语句在源文件中出现的顺序决定的
+        System.out.println("a=" + a);
         System.out.println("LoadInitTest static block");
     }
 
