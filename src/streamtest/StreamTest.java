@@ -27,6 +27,7 @@ public class StreamTest {
         return Stream.of(language);
     }
 
+    @Test
     public void printStream() {
         getIntStream().forEach(System.out::print);
         Tool.newLine();
