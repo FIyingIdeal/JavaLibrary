@@ -24,16 +24,15 @@ public class SocketChannelTest {
         try {
             socketChannel = SocketChannel.open();
             socketChannel.configureBlocking(false);
-            socketChannel.connect(new InetSocketAddress("192.168.3.20", 8080));
+            socketChannel.connect(new InetSocketAddress("localhost", 8080));
 
             if (socketChannel.finishConnect()) {
                 Scanner scanner = new Scanner(System.in);
                 scanner.useDelimiter("\\n");
-                //String input = null;//!"exit".equals(input = scanner.next())
+                String input = null;
                 int i = 0;
-                while (true) {
+                while (!"exit".equals(input = scanner.next())) {        //!"exit".equals(input = scanner.next())
                     TimeUnit.SECONDS.sleep(3);
-                    String input = "I'm "+ i++ +"-th information from client";
                     buffer.clear();
                     buffer.put(input.getBytes());
                     buffer.flip();

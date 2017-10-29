@@ -32,7 +32,7 @@ public class ServerSocketChannelTest {
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
             while (true) {
                 if (selector.select() == 0) {
-                    //System.out.println("==");
+                    System.out.println("==");
                     continue;
                 }
 
@@ -66,8 +66,15 @@ public class ServerSocketChannelTest {
         socketChannel.register(selectionKey.selector(), SelectionKey.OP_READ, ByteBuffer.allocate(BUFFER_SIZE));
     }
 
-    private static void handleWrite(SelectionKey selectionKey) {
+    private static void handleWrite(SelectionKey selectionKey) throws IOException {
         System.out.println("Server is ready to write!");
+        SocketChannel channel = (SocketChannel) selectionKey.channel();
+        String message = "I'm Server handleWrite method";
+        ByteBuffer buffer = ByteBuffer.wrap(message.getBytes());
+        while (buffer.hasRemaining()) {
+            channel.write(buffer);
+        }
+        channel.register(selectionKey.selector(), SelectionKey.OP_READ);
     }
 
     private static void handleRead(SelectionKey selectionKey) throws IOException {
@@ -84,8 +91,11 @@ public class ServerSocketChannelTest {
             buffer.clear();
             bytesRead = channel.read(buffer);
         }
-        if (bytesRead == -1) {
+        /*if (bytesRead == -1) {
             channel.close();
-        }
+        }*/
+        buffer.clear();
+
+        channel.register(selectionKey.selector(), SelectionKey.OP_WRITE);
     }
 }
