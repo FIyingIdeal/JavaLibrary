@@ -3,6 +3,7 @@ package test.java.util;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Created by Administrator on 2017/2/16.
@@ -53,6 +54,28 @@ public class ArrayListTest {
         List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
         List<Integer> subList = new ArrayList<>(Arrays.asList(1,2,3));
         System.out.println(list.containsAll(subList));
+    }
+
+    @Test
+    public void removeIf() {
+
+        List<Integer> numbers = new ArrayList<Integer>();
+        numbers.add(10);
+        numbers.add(15);
+        numbers.add(20);
+        numbers.add(25);Predicate<Integer> predicate = num -> num % 2 == 0;
+
+        System.out.println("Original List : " + numbers);
+        numbers.removeIf(predicate);
+        System.out.println("Odd numbers : " + numbers);
+
+        //Arrays.asList()生成的List是只读的，不能进行add和remove操作
+        //List<Integer> nums = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+        //Predicate<Integer> predicate = num -> num % 2 == 0;
+        //System.out.println("before remove : " + nums);
+        nums.removeIf(predicate);
+        System.out.println("after remove : " + nums);
     }
 
 }

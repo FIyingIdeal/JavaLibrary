@@ -1,4 +1,4 @@
-package lambda;
+package NewFeatures.lambda;
 
 import org.junit.Test;
 

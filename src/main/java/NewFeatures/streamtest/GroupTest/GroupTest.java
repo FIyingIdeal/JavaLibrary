@@ -1,4 +1,4 @@
-package streamtest.GroupTest;
+package NewFeatures.streamtest.GroupTest;
 
 import org.junit.Test;
 

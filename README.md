@@ -13,9 +13,9 @@
          
          test.java.InnerClassTest : 针对内部类（静态内部类、非静态内部类）的测试；
    
-3. lambda : java8的重要特性 -- lambda表达式的测试；
+3. NewFeatures.lambda : java8的重要特性 -- lambda表达式的测试；
 
-4. streamtest : 同样是java8的重要特性 -- Stream相关测试；
+4. NewFeatures.streamtest : 同样是java8的重要特性 -- Stream相关测试；
 
 5. trywithresource : jdk1.7开始支持的新的异常处理机制，简单说就是try-catch-finally的智能简化
 

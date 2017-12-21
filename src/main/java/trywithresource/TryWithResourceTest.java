@@ -25,7 +25,7 @@ public class TryWithResourceTest {
     public void tryCatch() {
         InputStream is = null;
         try {
-            is = new FileInputStream("src/streamtest/Tool.java");
+            is = new FileInputStream("src/NewFeatures/streamtest/Tool.java");
             //int data = fis.read();
             for (int data; (data = is.read()) != -1; ) {
                 System.out.print((char) data);
@@ -49,7 +49,7 @@ public class TryWithResourceTest {
      */
     @Test
     public void tryWithResource() {
-        try (FileInputStream fis = new FileInputStream("src/streamtest/Tool.java")) {
+        try (FileInputStream fis = new FileInputStream("src/NewFeatures/streamtest/Tool.java")) {
             for (int data; (data = fis.read()) != -1; ) {
                 System.out.print((char) data);
             }

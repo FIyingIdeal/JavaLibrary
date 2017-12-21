@@ -1,4 +1,4 @@
-package streamtest.GroupTest;
+package NewFeatures.streamtest.GroupTest;
 
 /**
  * Created by Administrator on 2017/8/3.

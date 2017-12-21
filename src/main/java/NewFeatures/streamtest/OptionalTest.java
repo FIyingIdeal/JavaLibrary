@@ -1,4 +1,4 @@
-package streamtest;
+package NewFeatures.streamtest;
 
 import java.util.Optional;
 
