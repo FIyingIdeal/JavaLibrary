@@ -17,8 +17,9 @@ public class FunctionalInterface {
     private static final Logger logger = LoggerFactory.getLogger(FunctionalInterface.class);
 
     /**
-     * 定义的一个Functional Interface
+     * 定义的一个Functional Interface @FunctionInterface 注解用来标识一个借口是Functional Interface，但非必须的。建议使用该注解标识。
      */
+    @java.lang.FunctionalInterface
     interface MyFunctionInterface {
         int add(int a, int b);
     }

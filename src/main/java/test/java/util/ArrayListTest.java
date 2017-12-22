@@ -63,13 +63,16 @@ public class ArrayListTest {
         numbers.add(10);
         numbers.add(15);
         numbers.add(20);
-        numbers.add(25);Predicate<Integer> predicate = num -> num % 2 == 0;
+        numbers.add(25);
+
+        Predicate<Integer> predicate = num -> num % 2 == 0;
 
         System.out.println("Original List : " + numbers);
         numbers.removeIf(predicate);
         System.out.println("Odd numbers : " + numbers);
 
-        //Arrays.asList()生成的List是只读的，不能进行add和remove操作
+        //Arrays.asList()生成的List(是一个Arrays.ArrayList，而不是常用的那个ArrayList)是只读的，不能进行add和remove操作
+        //
         //List<Integer> nums = Arrays.asList(1,2,3,4,5,6);
         List<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
         //Predicate<Integer> predicate = num -> num % 2 == 0;
