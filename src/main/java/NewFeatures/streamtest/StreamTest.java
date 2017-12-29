@@ -1,6 +1,7 @@
 package NewFeatures.streamtest;
 
 import org.junit.Test;
+import test.java.lang.IntegerTest.IntegerTest;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -113,10 +114,14 @@ public class StreamTest {
         Tool.println("min => " + min);
         //有初始值，可确定返回类型
         int sum = Stream.of(1,2,3,4,5).reduce(0, Integer::sum);
+        int sum_another = Stream.of(1,2,3,4,5).reduce(0, (a, b) -> a + b);
         Tool.println("sum => " + sum);
+        Tool.println("sum_another => " + sum_another);
         //无初始值，返回类型为Optional,需要通过get()来获取
         int sum1 = Stream.of(3,4,5,6,7).reduce(Integer::sum).get();
+        int sum1_another = Stream.of(3,4,5,6,7).reduce((a, b) -> a + b).get();
         Tool.println("sum1 => " + sum1);
+        Tool.println("sum1_another => " + sum1_another);
         //filter and sum
         int sum2 = Stream.of(1,3,6,4,3,6,8,5).filter(n -> n > 3).reduce(0, Integer::sum);
         Tool.println("sum2 => " + sum2);
@@ -243,5 +248,24 @@ public class StreamTest {
         persons.add(new Person(3, "name2"));
         persons.sort(Comparator.comparing(Person::getName).thenComparing(Person::getNum));
         persons.forEach(person -> Tool.println(person.getName() + ", " + person.getNum()));
+    }
+
+    @Test
+    public void toArray() {
+        int[] nums = {1,2,3,4,5};
+        String[] newArray = Arrays.stream(nums).mapToObj(num -> Integer.toString(num)).toArray(String[]::new);
+        Arrays.stream(newArray).forEach(System.out::println);
+    }
+
+    /**
+     * 对流的操作会产生一个结果，但流的数据源不会被修改
+     */
+    @Test
+    public void datasourceDoNotChange() {
+        List<Integer> nums = Arrays.asList(1,2,3);
+        List<Integer> newNums = nums.stream().map(num -> num + 2).collect(Collectors.toList());
+        System.out.println(nums);
+        System.out.println(newNums);
+
     }
 }
