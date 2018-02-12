@@ -84,9 +84,8 @@ public class SerializableTest {
      * @param object
      */
     public void serialize(String fileName, Object object) {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(
-                    new FileOutputStream(fileName));
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream(fileName))) {
             oos.writeObject(object);
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,15 +97,29 @@ public class SerializableTest {
      * @param fileName
      * @return
      */
-    public Object deserialize(String fileName) {
-        try {
-            ObjectInputStream ois = new ObjectInputStream(
-                    new FileInputStream(fileName));
+    /*public Object deserialize(String fileName) {
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream(fileName))) {
             return ois.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+   }*/
+
+
+   public <T> T deserialize(String fileName) {
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream(fileName))) {
+            return (T) ois.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,7 +142,7 @@ public class SerializableTest {
      */
     @Test
     public void deserializeFamily() {
-        Family family = (Family)deserialize("serializeFamily.txt");
+        Family family = deserialize("serializeFamily.txt");
         System.out.println(family);
     }
 
@@ -187,12 +200,8 @@ public class SerializableTest {
     public void reSerialize() {
         Parent parent = new Parent("name", 53);
         String fileName = "reSerialize.txt";
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(
-                    new FileOutputStream(fileName));
-            ObjectInputStream ois = new ObjectInputStream(
-                    new FileInputStream(fileName));
-
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
+             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
             oos.writeObject(parent);
             parent.setParentName("first name");
             //修改后重新序列化
@@ -207,8 +216,4 @@ public class SerializableTest {
         }
     }
 
-    public void test() {
-         int value;
-
-    }
 }

@@ -10,7 +10,7 @@ import java.io.InputStream;
  * @author yanchao
  * @version 1.0 2017/2/17.
  *
- *  try-with-resoure是java7开始开始支持的新的异常处理机制
+ *  try-with-resoure是java7开始支持的新的异常处理机制
  *  它能够很容易的关闭在try-catch语句块中使用的资源
  */
 public class TryWithResourceTest {

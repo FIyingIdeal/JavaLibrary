@@ -2,8 +2,6 @@ package test.java.lang.ClassLoaderTest;
 
 import org.junit.Test;
 
-import java.io.File;
-
 /**
  * Created by Administrator on 2017/7/13.
  */
@@ -11,14 +9,15 @@ import java.io.File;
 /**
  * {@code AppClassLoader} OR {@code SystemClassLoader}
  * 负责在JVM启动时，加载来自命令java中的-classpath或者java.class.path系统属性或者CLASSPATH操作系统属所指定的JAR类包和类路径。
- * 调用 {@code ClassLoader.getSystemClassLoader()} 可以获取该类加载器。如果没有特别指定，则用户自定义的任何类加载器都将该类加载器
- * 作为它的父加载器，详情见{@link java.lang.ClassLoader#ClassLoader()}
+ * 调用 {@code ClassLoader.getSystemClassLoader()} 可以获取该类加载器。
+ * 如果没有特别指定，则用户自定义的任何类加载器都将该类加载器作为它的父加载器，详情见{@link java.lang.ClassLoader#ClassLoader()}
  */
 public class AppClassLoader {
 
     @Test
     public void test() {
         System.out.println(System.getProperty("java.class.path"));
+        System.out.println(System.getProperty("CLASSPATH"));
     }
 
     /**
