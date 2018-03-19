@@ -1,7 +1,6 @@
 package NewFeatures.streamtest;
 
 import org.junit.Test;
-import test.java.lang.IntegerTest.IntegerTest;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
