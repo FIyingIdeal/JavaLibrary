@@ -20,7 +20,9 @@ public class MainStop5 {
 
         //方法二：定义一个子类，子类sleep5s，并调用其join方法让主线程等待
         MyThread myTHread = new MyThread();
+        System.out.println("Before start, MyThread isAlive ? " + myTHread.isAlive());
         myTHread.start();
+        System.out.println("After start, MyThread isAlive ? " + myTHread.isAlive());
         try {
             myTHread.join();
         } catch (InterruptedException e) {

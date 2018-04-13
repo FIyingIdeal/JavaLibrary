@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by Administrator on 2017/3/3.
  */
 public class User extends UserParent implements Serializable {
+    public static String CLASS_NAME;
     private String userName;
     private int userAge;
     private char userSex;

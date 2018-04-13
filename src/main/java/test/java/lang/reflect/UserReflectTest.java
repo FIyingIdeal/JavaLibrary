@@ -138,6 +138,31 @@ public class UserReflectTest {
         }
     }
 
+    /**
+     * 通过反射为类变量设置值
+     */
+    @Test
+    public void setStaticField() {
+        try {
+            Field field = User.class.getField("CLASS_NAME");
+            String value = String.valueOf(field.get(User.class));
+            System.out.println(value);
+            field.set(User.class, "User.class");
+            value = String.valueOf(field.get(User.class));
+            System.out.println(value);
+
+            // 也可以通过实例为类变量设置值，但这是不推荐的，因为可能造成混淆
+            User user = new User();
+            value = String.valueOf(field.get(user));
+            System.out.println(value);
+            field.set(user, "not suggested");
+            value = String.valueOf(field.get(User.class));
+            System.out.println(value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     //获取method及method的相关信息
     @Test
     public void getMethods() {

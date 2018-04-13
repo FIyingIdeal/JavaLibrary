@@ -81,4 +81,19 @@ public class ArrayListTest {
         System.out.println("after remove : " + nums);
     }
 
+    /**
+     * List#equals()方法比较两个List中的每一个元素是都equals，如果是则返回true，否则返回false
+     */
+    @Test
+    public void equalsTest() {
+        List<String> list1 = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
+        list1.add("1");
+        list1.add("2");
+        list2.add("1");
+        System.out.println(list1.equals(list2));    // false
+        list2.add("2");
+        System.out.println(list1.equals(list2));    // true
+    }
+
 }

@@ -9,7 +9,7 @@ public class LoadInitTest {
     //private InitTest unInstanceInitTest;
     // 将InitTest直接定义为LoadInitTest的一个非static属性并实例化:在只进行实例化而未被使用的情况下，不会调用InitTest的动态代码块
     // 如果是被使用的话，它会先于LoadInitTest的实例先实例化，因为它是实例的属性，而非类的属性！每初始化一个LoadInitTest实例就会实例化一次InitTest
-    // 2018-3-28 23:20:52 对于实例变量initTest，在new LoadInitTest()的实现，会先调用InitTest的构造方法，然后调用LoadInitTest的动态代码块，最后调用LoadInitTest的构造方法
+    // 2018-3-28 23:20:52 对于实例变量initTest，在new LoadInitTest()的时候，会先调用InitTest的构造方法，然后调用LoadInitTest的动态代码块，最后调用LoadInitTest的构造方法
     private InitTest initTest = new InitTest("Field");
 
     public LoadInitTest() {
