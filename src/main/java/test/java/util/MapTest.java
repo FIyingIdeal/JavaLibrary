@@ -18,6 +18,14 @@ public class MapTest {
     }
 
     @Test
+    public void newMap() {
+        Map<Integer, String> newMap = new HashMap<>(map);
+        newMap.put(4, "4");
+        System.out.println(map);
+        System.out.println(newMap);
+    }
+
+    @Test
     public void values() {
         System.out.println(map.values());
     }

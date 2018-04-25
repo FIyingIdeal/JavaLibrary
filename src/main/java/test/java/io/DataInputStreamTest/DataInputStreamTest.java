@@ -1,7 +1,7 @@
 package test.java.io.DataInputStreamTest;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * @author yanchao
@@ -10,13 +10,21 @@ import java.io.DataInputStream;
 public class DataInputStreamTest {
 
     public static void main(String[] args) {
+        DataInputStream dis = null;
         try {
-            DataInputStream dis = new DataInputStream(System.in);
+            dis = new DataInputStream(System.in);
             int num = dis.readInt();
             System.out.println("read num is " + num);
-            dis.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (dis != null) {
+                try {
+                    dis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

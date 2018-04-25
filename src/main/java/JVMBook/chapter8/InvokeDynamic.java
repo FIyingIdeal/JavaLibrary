@@ -44,8 +44,6 @@ public class InvokeDynamic {
     }
 
     public static void main(String[] args) {
-        (new InvokeDynamic().new Son()).thinking();
+        (new InvokeDynamic().new Son()).thinking();  // I am father ???
     }
 }
-
-
