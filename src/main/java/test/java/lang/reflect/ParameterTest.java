@@ -2,6 +2,7 @@ package test.java.lang.reflect;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -46,5 +47,7 @@ public class ParameterTest {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+
+        System.out.println(System.getProperty("file.separator") + File.separator);
     }
 }

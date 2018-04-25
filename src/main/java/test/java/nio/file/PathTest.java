@@ -11,7 +11,7 @@ public class PathTest {
 
     @Test
     public void PathsGet() {
-        Path path = Paths.get("G:/IDEAWorkspace/JavaLibrary/README.md");
+        Path path = Paths.get("G:", "IDEAWorkspace", "JavaLibrary", "README.md");
         System.out.println(path);
 
         // Paths.get()本质上是使用FileSystems.getDefault().getPath()来获取Path的

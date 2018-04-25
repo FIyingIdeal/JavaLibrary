@@ -22,6 +22,11 @@
             <version>4.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
 
 
         <dependency>
@@ -55,6 +60,49 @@
                     <compilerArgument>-parameters</compilerArgument>
                 </configuration>
             </plugin>
+
+            <!--<plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <configuration>
+                    <nodeDownloadRoot>http://npm.taobao.org/mirrors/node/</nodeDownloadRoot>
+                    <npmDownloadRoot>http://npm.taobao.org/mirrors/npm/</npmDownloadRoot>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            &lt;!&ndash; <nodeVersion>${node-for-v2.version}</nodeVersion> &ndash;&gt;
+                            <nodeVersion>v4.4.2</nodeVersion>
+                            <npmVersion>3.8.5</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                            <workingDirectory>${basedir}/target/node</workingDirectory>
+                            <npmRegistryURL>http://registry.npmjs.org/</npmRegistryURL>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>grunt dist</id>
+                        <goals>
+                            <goal>grunt</goal>
+                        </goals>
+                        <configuration>
+                            &lt;!&ndash; <arguments>${project.build.dashboardv2.gruntBuild}</arguments> &ndash;&gt;
+                            <arguments>build-minify</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
     </build>
 
