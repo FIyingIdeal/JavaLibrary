@@ -9,7 +9,9 @@ import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 /**
  * java.nio.file.Files 测试
@@ -186,7 +188,7 @@ public class FilesTest {
     @Test
     public void newBufferedWriter() {
         Path path = Paths.get("G:/123", "test.txt");
-        try (BufferedWriter bw = Files.newBufferedWriter(path,Charset.forName("UTF-8"), StandardOpenOption.APPEND)) {
+        try (BufferedWriter bw = Files.newBufferedWriter(path, Charset.forName("UTF-8"), StandardOpenOption.APPEND)) {
             bw.write("newBufferedWriter test");
         } catch (IOException e) {
             e.printStackTrace();
@@ -383,6 +385,26 @@ public class FilesTest {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void list() throws IOException {
+
+        Path path = Paths.get("G:\\IDEAWorkspace\\JavaLibrary\\src\\main\\java\\test\\java\\nio\\file");
+        try (Stream<Path> pathStream = Files.list(path);) {
+            /*pathStream.forEach(p -> {
+                System.out.println(p.getFileName());
+            });*/
+            pathStream.forEach(p -> {
+                if (Objects.equals(p.getFileName().toString(), "PathTest.java")) {
+                    System.out.println(p.toString());
+                } else if (Objects.equals(p.getFileName().toString(), "FilesTest.java")) {
+                    System.out.println(p.getFileName());
+                }
+            });
+
+        }
+
     }
 
 }
