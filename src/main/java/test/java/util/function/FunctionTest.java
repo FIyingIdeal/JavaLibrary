@@ -25,4 +25,16 @@ public class FunctionTest {
         logger.info("function's length is {}", function.apply("function"));
         logger.info("function1's length is {}", function1.apply("function1"));
     }
+
+    public int giveOneWayToGetIntegerFromString(Function<String, Integer> function, String str) {
+        return function.apply(str);
+    }
+
+    @Test
+    public void testMyFunction() {
+        Function<String, Integer> getLengthFunction = s -> s.length();
+        System.out.println(giveOneWayToGetIntegerFromString(getLengthFunction, "HelloWorld"));
+        Function<String, Integer> getIndexOfFirstOFunction =  s -> s.indexOf("o");
+        System.out.println(giveOneWayToGetIntegerFromString(getIndexOfFirstOFunction, "HelloWorld"));
+    }
 }
