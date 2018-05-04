@@ -1,13 +1,21 @@
 package test.java.util.concurrent.TimeUnitTest;
 
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Administrator on 2016/7/14.
+ * @author yanchao
+ * @date 2018-4-25 16:06:39
  */
 public class TimeUnitTest {
 
-    public static void main(String[] args) {
-        System.out.println(TimeUnit.HOURS.toMinutes(1));
+    private static final Logger logger = LoggerFactory.getLogger(TimeUnitTest.class);
+
+    @Test
+    public void test() {
+        logger.info("1 seconds to minute : {}", TimeUnit.SECONDS.toMinutes(1L));
     }
 }

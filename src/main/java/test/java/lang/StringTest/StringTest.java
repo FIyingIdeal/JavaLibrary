@@ -58,6 +58,7 @@ public class StringTest {
         String strWithNumber = "%s %d";
         String formatWithNumber = String.format(strWithNumber, "String with number", 123);
         System.out.println(formatWithNumber);
+
     }
 
     @Test

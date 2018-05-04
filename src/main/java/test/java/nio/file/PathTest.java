@@ -143,6 +143,8 @@ public class PathTest {
         path1 = base.resolve(path1); // 参数可以是一个String或Path对象
         // G:\IDEAWorkspace\JavaLibrary\README.md\..\test.txt
         System.out.println(path1);
+        // G:\IDEAWorkspace\JavaLibrary\README.md    由运行结果可知，base不会被改变
+        System.out.println(base);
     }
 
     // 根据给定的路径去替换当前的路径
