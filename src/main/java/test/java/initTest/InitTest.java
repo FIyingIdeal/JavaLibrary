@@ -32,17 +32,33 @@ public class InitTest extends Parent {
 
     public static void main(String[] args) {
         InitTest test1 = new InitTest();
-
+        System.out.println("test1.s = " + test1.getS());
         InitTest test2 = new InitTest();
+        System.out.println("test2.s = " + test2.getS());
 
     }
 }
 
 class Parent {
 
+    private String s;
+
+    static {
+        System.out.println("Parent static block");
+    }
+
+    {
+        System.out.println("Parent dynamic block: s = " + s);
+    }
+
     // 父类构造方法先于子类的动态代码块执行
     public Parent() {
+        this.s = "123";
         System.out.println("Parent Constructor");
+    }
+
+    public String getS() {
+        return this.s;
     }
 
 }
