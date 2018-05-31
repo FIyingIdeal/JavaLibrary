@@ -1,11 +1,9 @@
-package test.java.initTest.JVM;
+package JVMBook.chapter7.clinit;
 
 /**
- * Created by Administrator on 2017/7/17.
- */
-
-/**
- * 参考：http://www.cnblogs.com/javaee6/p/3714716.html
+ * @author yanchao
+ * @date 2017/7/17.
+ * @see <a href="http://www.cnblogs.com/javaee6/p/3714716.html"/>
  */
 public class StaticFieldInit {
 
