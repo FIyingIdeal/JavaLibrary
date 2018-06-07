@@ -8,6 +8,7 @@ import test.java.io.bean.Parent;
 import test.java.io.bean.Player;
 
 import java.io.*;
+import java.util.Base64;
 
 import test.java.io.bean.Family;
 
@@ -34,6 +35,9 @@ public class SerializableTest {
 
     /**
      * 序列化一个对象到String
+     * @see <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4968673">Java BUG</a>
+     * @see <a href="https://blog.csdn.net/woshisangsang/article/details/78470416"/>  这篇文章指出，如果使用ByteArrayOutputStream#toString("ISO-8859-1")及String#getBytes("ISO-8859-1")时可以序列化和反序列化成功
+     * @see <a href="https://blog.csdn.net/cubesky/article/details/38753861"/>  这篇文章最后指出，如果使用Base64编解码也是可以成功的
      */
     @Test
     public void serializeObjectToString() {
@@ -41,9 +45,13 @@ public class SerializableTest {
         try ( ByteArrayOutputStream baos = new ByteArrayOutputStream();
               ObjectOutputStream oos = new ObjectOutputStream(baos) ) {
             oos.writeObject(player);
-            logger.info("Player serialize to String is : {}", baos.toString("ISO-8859-1"));
+            // 1. 使用ISO-8859-1编码
+            // String serializeString = baos.toString("ISO-8859-1");
+            // 2. 使用Base64编码
+            String serializeString = Base64.getEncoder().encodeToString(baos.toByteArray());
+            logger.info("Player serialize to String is : {}", serializeString);
             // 转为String的时候必须制定编码集为“ISO-8859-1”，并且反序列化的时候也需要将制定，否则的话反序列化失败
-            deserializeStringToObject(baos.toString("ISO-8859-1"));
+            deserializeStringToObject(serializeString);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,12 +59,17 @@ public class SerializableTest {
 
     /**
      * 字符串反序列化为Object
-     * @see <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4968673"/>
-     * @see <a href="https://blog.csdn.net/woshisangsang/article/details/78470416"/>
+     * @see <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4968673">Java BUG</a>
+     * @see <a href="https://blog.csdn.net/woshisangsang/article/details/78470416"/>  这篇文章指出，如果使用ByteArrayOutputStream#toString("ISO-8859-1")及String#getBytes("ISO-8859-1")时可以序列化和反序列化成功
+     * @see <a href="https://blog.csdn.net/cubesky/article/details/38753861"/>  这篇文章最后指出，如果使用Base64编解码也是可以成功的
      * @param str
      */
-    public void deserializeStringToObject(String str) {
-        try (ByteArrayInputStream bais = new ByteArrayInputStream(str.getBytes("ISO-8859-1"));
+    public void deserializeStringToObject(String str) throws UnsupportedEncodingException {
+        // 1. 使用ISO-8859-1编码
+        // byte[] deserializeBytes = str.getBytes("ISO-8859-1");
+        // 2. 使用Base64解码
+        byte[] deserializeBytes = Base64.getDecoder().decode(str);
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(deserializeBytes);
              ObjectInputStream ois = new ObjectInputStream(bais)) {
             Player player = (Player) ois.readObject();
             logger.info("String deserialize to Player is : {}", player);
