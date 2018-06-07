@@ -1,6 +1,8 @@
 package test.java.io;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import test.java.io.bean.Child;
 import test.java.io.bean.Parent;
 import test.java.io.bean.Player;
@@ -10,16 +12,19 @@ import java.io.*;
 import test.java.io.bean.Family;
 
 /**
- * Created by Administrator on 2017/2/6.
+ * @author yanchao
+ * @date 2017/2/6
  */
 public class SerializableTest {
 
-    //序列化一个对象
+    private static final Logger logger = LoggerFactory.getLogger(SerializableTest.class);
+
+    /**
+     * 序列化一个对象到文件中
+     */
     @Test
     public void serializeTest() {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(
-                    new FileOutputStream("serialize.txt"));
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("serialize.txt"))) {
             Player player = new Player("yanchao", 25, 'F');
             oos.writeObject(player);
         } catch (IOException e) {
@@ -27,12 +32,45 @@ public class SerializableTest {
         }
     }
 
-    //反序列化一个对象
+    /**
+     * 序列化一个对象到String
+     */
+    @Test
+    public void serializeObjectToString() {
+        Player player = new Player("yanchao", 25, 'F');
+        try ( ByteArrayOutputStream baos = new ByteArrayOutputStream();
+              ObjectOutputStream oos = new ObjectOutputStream(baos) ) {
+            oos.writeObject(player);
+            logger.info("Player serialize to String is : {}", baos.toString("ISO-8859-1"));
+            // 转为String的时候必须制定编码集为“ISO-8859-1”，并且反序列化的时候也需要将制定，否则的话反序列化失败
+            deserializeStringToObject(baos.toString("ISO-8859-1"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 字符串反序列化为Object
+     * @see <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4968673"/>
+     * @see <a href="https://blog.csdn.net/woshisangsang/article/details/78470416"/>
+     * @param str
+     */
+    public void deserializeStringToObject(String str) {
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(str.getBytes("ISO-8859-1"));
+             ObjectInputStream ois = new ObjectInputStream(bais)) {
+            Player player = (Player) ois.readObject();
+            logger.info("String deserialize to Player is : {}", player);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 从文件中反序列化一个对象
+     */
     @Test
     public void deserializeTest() {
-        try {
-            ObjectInputStream ois = new ObjectInputStream(
-                    new FileInputStream("serialize.txt"));
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("serialize.txt"))) {
             Player player = (Player)ois.readObject();
             System.out.println(player);
         } catch (IOException e) {
@@ -48,10 +86,8 @@ public class SerializableTest {
      */
     @Test
     public void serializeChild() {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(
-                    new FileOutputStream("serializeChild.txt")
-            );
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("serializeChild.txt"))) {
             Child child = new Child("parentName", 55, "childName", 25);
             oos.writeObject(child);
         } catch (IOException e) {
@@ -66,9 +102,8 @@ public class SerializableTest {
      */
     @Test
     public void deserializeChild() {
-        try {
-            ObjectInputStream ois = new ObjectInputStream(
-                    new FileInputStream("serializeChild.txt"));
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("serializeChild.txt"))) {
             Child child = (Child)ois.readObject();
             System.out.println(child);
         } catch (IOException e) {
@@ -156,9 +191,8 @@ public class SerializableTest {
     public void serializeMultObject() {
         Parent parent = new Parent("parentName", 55);
         Child child = new Child("childName", 25);
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(
-                    new FileOutputStream("serializeMultObject.txt"));
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("serializeMultObject.txt"))) {
             oos.writeObject(parent);
             oos.writeObject(child);
             oos.writeObject(parent);
@@ -172,15 +206,15 @@ public class SerializableTest {
      */
     @Test
     public void deserializeMultObject() {
-        try {
-            ObjectInputStream ois = new ObjectInputStream(
-                    new FileInputStream("serializeMultObject.txt"));
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("serializeMultObject.txt"))) {
             Parent parent = (Parent)ois.readObject();
             Child child = (Child) ois.readObject();
             Parent parent1 = (Parent)ois.readObject();
             System.out.println(child);
             System.out.println(parent);
-            System.out.println(parent == parent1);  //true
+            // true
+            System.out.println(parent == parent1);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -204,11 +238,12 @@ public class SerializableTest {
              ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
             oos.writeObject(parent);
             parent.setParentName("first name");
-            //修改后重新序列化
+            // 修改后重新序列化
             oos.writeObject(parent);
 
             Parent desParent = (Parent)ois.readObject();
-            System.out.println(desParent.getParentName());//name
+            // name
+            System.out.println(desParent.getParentName());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
