@@ -1,4 +1,4 @@
-package JVMBook.chapter7;
+package JVMBook.chapter7.clinit;
 
 /**
  * @author yanchao

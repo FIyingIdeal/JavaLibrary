@@ -73,7 +73,7 @@ public class FilesTest {
      */
     @Test
     public void createDirectory() {
-        Path path = Paths.get("G:/123");
+        Path path = Paths.get("F:/123");
         try {
             // 如果文件已经存在的话将会抛出异常
             Files.createDirectory(path);
