@@ -16,23 +16,24 @@ import java.util.Iterator;
 public class ServerSocketChannelTest {
 
     private final static int BUFFER_SIZE = 1024;
+    private static volatile boolean ACCEPT = true;
 
     public static void main(String[] args) {
         selector();
     }
 
     private static void selector() {
-        ServerSocketChannel serverSocketChannel = null;
-        Selector selector = null;
-        try {
-            selector = Selector.open();
-            serverSocketChannel = ServerSocketChannel.open();
+        try (
+                Selector selector = Selector.open();
+                ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
+
             serverSocketChannel.configureBlocking(false);
             serverSocketChannel.socket().bind(new InetSocketAddress(8080));
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-            while (true) {
+            while (ACCEPT) {
+                // 通过调用 select 方法, 阻塞地等待 channel I/O 可操作
                 if (selector.select() == 0) {
-                    System.out.println("==");
+                    System.out.print(".");
                     continue;
                 }
 
@@ -81,14 +82,19 @@ public class ServerSocketChannelTest {
         System.out.println("Server is ready to read!");
         ByteBuffer buffer = (ByteBuffer) selectionKey.attachment();
         SocketChannel channel = (SocketChannel) selectionKey.channel();
+        // 将channel内容写进buffer中
         int bytesRead = channel.read(buffer);
         while (bytesRead != -1) {
+            // 将buffer置为读状态
             buffer.flip();
             while (buffer.hasRemaining()) {
+                // 从buffer中读取内容
                 System.out.print((char) buffer.get());
             }
             //System.out.println();
+            // 清空buffer以便下一次写
             buffer.clear();
+            // 继续写buffer
             bytesRead = channel.read(buffer);
         }
         /*if (bytesRead == -1) {

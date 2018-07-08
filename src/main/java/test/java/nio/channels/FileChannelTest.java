@@ -16,11 +16,10 @@ public class FileChannelTest {
      */
 
     public void test() {
-        try {
+        try (RandomAccessFile file = new RandomAccessFile("filepath.txt", "rw")) {
             //获取Channel:可以通过FileInputStream、FileOutputStream、RandomAccessFile来获取FileChannel实例
-            RandomAccessFile file = new RandomAccessFile("filepath.txt", "rw");
-            FileChannel channel = file.getChannel();
 
+            FileChannel channel = file.getChannel();
 
             //从FileChannel读取数据
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024);

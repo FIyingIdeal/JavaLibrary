@@ -32,7 +32,7 @@ public class SocketChannelTest {
                 String input = null;
                 int i = 0;
                 while (!"exit".equals(input = scanner.next())) {        //!"exit".equals(input = scanner.next())
-                    TimeUnit.SECONDS.sleep(3);
+                    //TimeUnit.SECONDS.sleep(3);
                     buffer.clear();
                     buffer.put(input.getBytes());
                     buffer.flip();
@@ -41,7 +41,7 @@ public class SocketChannelTest {
                     }
                 }
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException /*| InterruptedException*/ e) {
             e.printStackTrace();
         } finally {
             try {
