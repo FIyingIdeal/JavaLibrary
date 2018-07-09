@@ -3,14 +3,12 @@ package test.java.time;
 import org.junit.Test;
 
 import java.sql.Timestamp;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -75,5 +73,22 @@ public class LocalDateTimeTest {
         LocalDateTime localDateTime = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(localDateTime);
         System.out.println(timestamp);
+    }
+
+    /**
+     * 转换成秒，转换成毫秒需要借助{@link Instant}，参考{@link this#toInstant()}
+     */
+    @Test
+    public void toEpochSecond() {
+        long milliseconds1 = LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
+        System.out.println(milliseconds1);
+    }
+
+    @Test
+    public void toInstant() {
+        long milliseconds = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        System.out.println(milliseconds);
+        Date date = new Date(milliseconds);
+        System.out.println(date);
     }
 }
