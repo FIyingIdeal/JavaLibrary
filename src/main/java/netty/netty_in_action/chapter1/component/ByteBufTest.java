@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.charset.Charset;
-
 /**
  * @author yanchao
  * @date 2018/7/12 14:19
@@ -49,4 +47,25 @@ public class ByteBufTest {
         // writerIndex = 20
         logger.info("writerIndex = {}", writerIndex);
     }
+
+    @Test
+    public void indexOf() {
+        ByteBuf byteBuf = Unpooled.copiedBuffer("Hello World!", CharsetUtil.UTF_8);
+        int readerIndex = byteBuf.readerIndex();
+        int writerIndex = byteBuf.writerIndex();
+        int index = byteBuf.indexOf(readerIndex, writerIndex, (byte)' ');
+        logger.info("readerIndex = {}, writerIndex = {}, ' 'Index = {}", readerIndex, writerIndex, index);
+    }
+
+    @Test
+    public void slice() {
+        ByteBuf byteBuf = Unpooled.copiedBuffer("Hello World!", CharsetUtil.UTF_8);
+        int readerIndex = byteBuf.readerIndex();
+        int writerIndex = byteBuf.writerIndex();
+        int index = byteBuf.indexOf(readerIndex, writerIndex, (byte)' ');
+        String slice1 = byteBuf.slice(readerIndex, index).toString(CharsetUtil.UTF_8);
+        String slice2 = byteBuf.slice(index +1,  writerIndex).toString(CharsetUtil.UTF_8);
+        logger.info("slice1 is {}, slice2 is {}", slice1, slice2);
+    }
+
 }
