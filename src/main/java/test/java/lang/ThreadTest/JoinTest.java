@@ -26,16 +26,16 @@ public class JoinTest extends Thread {
     }
 
     public static void main(String[] args) {
-        JoinTest jointest1 = new JoinTest("Thread1");
-        JoinTest jointest2 = new JoinTest("Thread2");
+        JoinTest joinTest1 = new JoinTest("Thread1");
+        JoinTest joinTest2 = new JoinTest("Thread2");
 
-        jointest1.start();
+        joinTest1.start();
         try {
-            jointest1.join();
+            joinTest1.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        jointest2.start();
+        joinTest2.start();
 
     }
 }
