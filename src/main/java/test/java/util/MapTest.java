@@ -96,7 +96,10 @@ public class MapTest {
     @Test
     public void putIfAbsent() {
         map.put(4, null);
-        map.putIfAbsent(4, "4"); // 4=4，上边的null会被覆盖掉
+        String value = map.putIfAbsent(4, "4");     // 4=4，上边的null会被覆盖掉
+        System.out.println("value = " + value);     // null
+        String value1 = map.putIfAbsent(4, "44");   // 4=4，上边的4不会被覆盖掉，44被忽略，旧值4被返回
+        System.out.println("value = " + value1);    // 4
         map.putIfAbsent(5, "5");
         map.forEach((k, v) -> System.out.println(k + "=" + v));
     }
