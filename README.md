@@ -1,4 +1,4 @@
-# JavaLibrary
+# Java8Library
 基于JDK1.8的java基础知识记录及代码测试，代码中包含有一些简要但很重要的注释。
 
 代码目录说明：
