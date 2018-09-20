@@ -7,6 +7,7 @@ import java.util.concurrent.*;
  * Created by Administrator on 2017/3/2.
  */
 public class CompletionServiceTest {
+
     public static void main(String[] args) {
         try {
             completionServiceCounter();

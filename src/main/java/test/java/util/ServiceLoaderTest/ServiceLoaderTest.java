@@ -9,7 +9,8 @@ import java.util.ServiceLoader;
  *
  * SPI机制，全称为Service Provider Interface，是JDK内置的一种服务提供发现机制。
  * 一个服务（Service）通常指的是已知的接口或抽象类，服务提供方就是对这个接口或抽象类的实现。
- * 然后按照SPI标准放到资源路径META-INF/services目录（有IDE的问题，本测试用例的该目录是在target/classes中）下，文件的命名为该服务接口的全限定名
+ * 然后按照SPI标准放到资源路径META-INF/services目录
+ * （有IDE的问题，本测试用例的该目录是在target/classes中）下，文件的命名为该服务接口的全限定名
  */
 public class ServiceLoaderTest {
 
