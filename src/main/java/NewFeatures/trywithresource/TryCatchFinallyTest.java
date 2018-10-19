@@ -1,4 +1,4 @@
-package trywithresource;
+package NewFeatures.trywithresource;
 
 /**
  * @author yanchao

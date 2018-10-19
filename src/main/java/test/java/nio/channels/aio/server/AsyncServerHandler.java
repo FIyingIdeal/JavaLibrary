@@ -1,7 +1,5 @@
 package test.java.nio.channels.aio.server;
 
-import test.java.nio.channels.aio.server.AcceptHandler;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;

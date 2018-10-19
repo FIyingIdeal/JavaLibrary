@@ -17,7 +17,7 @@
 
 4. NewFeatures.streamtest : 同样是java8的重要特性 -- Stream相关测试；
 
-5. trywithresource : jdk1.7开始支持的新的异常处理机制，简单说就是try-catch-finally的智能简化
+5. NewFeatures.trywithresource : jdk1.7开始支持的新的异常处理机制，简单说就是try-catch-finally的智能简化
 
 6. ...其他包待定
 
