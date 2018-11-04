@@ -27,8 +27,8 @@ public class OptionalTest {
         User user = getUser();
         Optional<User> userOptional = Optional.of(user);
         logger.info("userInfo : {}", userOptional.orElse(null));
-        //抛出NullPointerException
-        //Optional<User> nullOptional = Optional.of(null);
+        // 抛出NullPointerException
+        // Optional<User> nullOptional = Optional.of(null);
     }
 
     /**
@@ -84,7 +84,7 @@ public class OptionalTest {
         Optional<User> nullOptional = Optional.ofNullable(null);
 
         userOptional.ifPresent(user -> logger.info("userInfo : {}", user));
-        //由于是null，Consumer不会被执行，所以不会输出
+        // 由于是null，Consumer不会被执行，所以不会输出
         nullOptional.ifPresent(user -> logger.info("userInfo : {}", user));
     }
 
@@ -94,7 +94,9 @@ public class OptionalTest {
     @Test
     public void orElse() {
         Optional<User> nullOptional = Optional.ofNullable(null);
+        Optional<User> userOptional = Optional.of(getUser());
         logger.info("nullOptional orElse : {}", nullOptional.orElse(new User("Unknown", "Unknown")));
+        logger.info("nullOptional orElse : {}", userOptional.orElse(new User("Unknown", "Unknown")));
     }
 
     /**

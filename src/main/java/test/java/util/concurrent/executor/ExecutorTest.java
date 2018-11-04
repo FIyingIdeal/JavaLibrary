@@ -16,6 +16,21 @@ import java.util.concurrent.*;
  */
 public class ExecutorTest {
 
+    static class MyThread implements Runnable {
+
+        @Override
+        public void run() {
+            //while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + "正在执行！");
+            //}
+        }
+    }
+
     public static void main(String[] args) {
         ExecutorService singleThread = Executors.newSingleThreadExecutor();
         for (int i = 0; i < 5; i++) {
@@ -24,6 +39,12 @@ public class ExecutorTest {
         singleThread.shutdown();
 
         try {
+            /**
+             * awaitTermination() 在以下三种事件之一发生时，停止阻塞：
+             * 1. 如果所有线程执行完毕以后，即使未到指定的时间也停止阻塞；
+             * 2. 线程未执行完毕，到达指定的时间；
+             * 3. 线程被中断；
+             */
             singleThread.awaitTermination(10, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -69,7 +90,7 @@ public class ExecutorTest {
     }
 
     /**
-     *创建一个可缓存的线程池
+     * 创建一个可缓存的线程池
      * 创建的线程数量受限于系统环境（JVM）指定最大线程数量
      */
     @Test
@@ -87,17 +108,17 @@ public class ExecutorTest {
     }
 
     /**
-     *定时执行者服务
+     * 定时执行者服务
      */
     @Test
     public void scheduledThreadPool() {
-        //注意，此处的类型为ScheduledExecutorService，是一个interface
+        // 注意，此处的类型为ScheduledExecutorService，是一个interface
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(3);
         System.out.println("It will execute 2s later");
         for (int i = 0; i < 5; i++) {
-            //延迟两秒钟在执行
+            // 延迟两秒钟在执行
             //pool.schedule(new MyThread(), 2, TimeUnit.SECONDS);
-            //延迟1s后每秒执行一次
+            // 延迟1s后每秒执行一次
             pool.scheduleAtFixedRate(new MyThread(), 1, 1, TimeUnit.SECONDS);
         }
 
@@ -111,7 +132,7 @@ public class ExecutorTest {
 
     @Test
     public void scheduledThreadPoolExecutor() {
-        //线程池之间的多个线程之间互不影响
+        // 线程池之间的多个线程之间互不影响
         ScheduledThreadPoolExecutor pool = new ScheduledThreadPoolExecutor(2);
         for (int i = 0; i < 5; i++) {
             pool.scheduleAtFixedRate(new MyThread(), 1000, 1000, TimeUnit.MILLISECONDS);
@@ -125,8 +146,10 @@ public class ExecutorTest {
         pool.shutdown();
     }
 
-    //Callable与Runnable类似，但它可以在线程执行完毕以后获取结果，而Runnable不可以
-    //与实现Runnable接口的类需要重写run()方法一样，实现Callable接口的类需要重写call()方法
+    /**
+     * Callable与Runnable类似，但它可以在线程执行完毕以后获取结果，而Runnable不可以
+     * 与实现Runnable接口的类需要重写run()方法一样，实现Callable接口的类需要重写call()方法
+     */
     @Test
     public void callable() {
         ExecutorService pool = Executors.newFixedThreadPool(5);

@@ -18,6 +18,38 @@ import java.util.List;
  */
 public class ComparatorTest {
 
+    class Student {
+        //为了省略一堆getter/setter方法，节省空间，一般情况下不推荐将对象属性定义为public
+        public String username;
+        public int age;
+
+        public Student (String username, int age) {
+            this.username = username;
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "username='" + username + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+    }
+
+    class MyComparator implements Comparator {
+        //按age排序，age相同的话按username倒排序
+        @Override
+        public int compare(Object o1, Object o2) {
+            Student s1 = (Student)o1;
+            Student s2 = (Student)o2;
+            if (s1.age == s2.age) {
+                return s2.username.compareTo(s1.username);
+            }
+            return s1.age > s2.age ? 1 : -1;
+        }
+    }
+
     @Test
     public void comparator() {
         Student wang1 = new Student("wang", 28);
@@ -37,36 +69,4 @@ public class ComparatorTest {
         list.forEach(student -> System.out.println(student));
     }
 
-}
-
-class Student {
-    //为了省略一堆getter/setter方法，节省空间，一般情况下不推荐将对象属性定义为public
-    public String username;
-    public int age;
-
-    public Student (String username, int age) {
-        this.username = username;
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "username='" + username + '\'' +
-                ", age=" + age +
-                '}';
-    }
-}
-
-class MyComparator implements Comparator {
-    //按age排序，age相同的话按username倒排序
-    @Override
-    public int compare(Object o1, Object o2) {
-        Student s1 = (Student)o1;
-        Student s2 = (Student)o2;
-        if (s1.age == s2.age) {
-            return s2.username.compareTo(s1.username);
-        }
-        return s1.age > s2.age ? 1 : -1;
-    }
 }

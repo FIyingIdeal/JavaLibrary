@@ -7,7 +7,7 @@ package test.java.lang.ThreadTest;
  * 其设置方式有两种：
  *      1.通过Thread.setDefaultUncaughtExceptionHandler()来设置，这种方式只针对所有代码都使用相同的异常处理器，
  *        否则应该定义不同的异常处理为线程设置对应的异常处理器；
- *      2.通过{@link test.java.util.concurrent.threadfactory.MyThreadFactory}来设置；
+ *      2.通过{@link test.java.util.concurrent.threadFactory.MyThreadFactory}来设置；
  */
 public class UncaughtExceptionHandlerTest {
 

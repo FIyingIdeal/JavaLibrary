@@ -11,6 +11,14 @@ import java.util.function.Predicate;
  */
 public class ArrayListTest {
 
+    @Test
+    public void add() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        System.out.println(list);
+    }
+
     /**
      * 不要在foreach循环里进行元素的remove/add操作。
      * remove元素请使用Iterator方式，如果并发操作，需要对Iterator对象加锁
@@ -20,7 +28,7 @@ public class ArrayListTest {
         List<String> list = new ArrayList<>();
         list.add("1"); list.add("2"); list.add("3");
 
-        //在foreach中执行remove操作会正常执行但运行结果异常
+        // 在foreach中执行remove操作会正常执行但运行结果异常
         /*for (String temp : list) {
             if (Objects.equals("1", temp)) {
                 //java.util.ConcurrentModificationException List初始为两个元素的时候不会异常...
@@ -29,21 +37,21 @@ public class ArrayListTest {
         }
         System.out.println(list);*/   //[1, 2]
 
-        //这种方式list一直在变化，index=0的元素删除后，原来index=1的元素就会在下一次遍历的时候变为index=0
-        //这样该元素就会无法删掉....
+        // 这种方式list一直在变化，index=0的元素删除后，原来index=1的元素就会在下一次遍历的时候变为index=0
+        // 这样该元素就会无法删掉....
         /*for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i) + ":" + list.remove(i));
             System.out.println(list.size());
         }*/
 
-        //使用Iterator执行集合的remove操作
+        // 使用Iterator执行集合的remove操作
         Iterator<String> iterator = list.iterator();
         while (iterator.hasNext()) {
             String temp = iterator.next();
             if (Objects.equals("1", temp)) {
                 iterator.remove();
-                //java.util.ConcurrentModificationException List初始为两个元素的时候不会异常...
-                //list.remove(temp);
+                // java.util.ConcurrentModificationException List初始为两个元素的时候不会异常...
+                // list.remove(temp);
             }
         }
         System.out.println(list);

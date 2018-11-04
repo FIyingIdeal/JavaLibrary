@@ -13,6 +13,22 @@ import java.util.List;
  */
 public class Generic {
 
+    // 泛型擦除
+    @Test
+    public void getGenericClass() {
+        Class c1 = new ArrayList<Integer>().getClass();
+        Class c2 = new ArrayList<String>().getClass();
+        // true
+        System.out.println("c1 == c2 ? " + (c1 == c2));
+        // c1 = class java.util.ArrayList , c2 = class java.util.ArrayList
+        System.out.println("c1 = " + c1 + " , c2 = " + c2);
+    }
+
+    @Test
+    public void getTypeParameters() {
+
+    }
+
     /**
      * 数组是支持协变的
      */

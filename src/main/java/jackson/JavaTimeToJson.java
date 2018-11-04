@@ -107,7 +107,7 @@ public class JavaTimeToJson {
         // "localDate":{"year":2018,"month":"JUNE","chronology":{"id":"ISO","calendarType":"iso8601"},"era":"CE","dayOfMonth":14,"dayOfWeek":"THURSDAY","dayOfYear":165,"leapYear":false,"monthValue":6},
         // "localDateTime":{"hour":14,"minute":51,"nano":941000000,"second":17,"dayOfMonth":14,"dayOfWeek":"THURSDAY","dayOfYear":165,"month":"JUNE","monthValue":6,"year":2018,"chronology":{"id":"ISO","calendarType":"iso8601"}}}
 
-        mapper.registerModule(new JSR310Module());
+        mapper.registerModule(new JavaTimeModule());
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         logger.info("with JSR310 : {}", mapper.writeValueAsString(new JavaTime()));
 

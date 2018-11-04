@@ -35,5 +35,6 @@ public class SetTest {
         resultSet = new HashSet<>(superSet);
         System.out.println(subSet.retainAll(resultSet)); //false，如果subSet中的元素为[2,4,6,7]此处就为true
         System.out.println(subSet);                     //[2, 4, 6]
+
     }
 }

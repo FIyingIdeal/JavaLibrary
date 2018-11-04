@@ -53,6 +53,28 @@ public class FutureTaskTest {
         TimeUnit.SECONDS.sleep(5);
     }
 
+    @Test
+    public void oneThreadUseFutureTask() {
+        Runnable runnable = () -> {
+            System.out.println("task start");
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("task finished");
+        };
+
+        FutureTask futureTask = new FutureTask(runnable, "RESULT");
+        futureTask.run();
+        try {
+            Object result = futureTask.get();
+            System.out.println(result);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

@@ -78,7 +78,7 @@ class Horse implements Runnable {
         cyclicBarrier = cb;
     }
 
-    public synchronized int getStrides() {
+    public /*synchronized*/ int getStrides() {
         return this.strides;
     }
 
@@ -86,9 +86,9 @@ class Horse implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                synchronized (this) {
+                //synchronized (this) {
                     strides += random.nextInt(3);
-                }
+                //}
                 cyclicBarrier.await();
             }
         } catch (InterruptedException e) {
