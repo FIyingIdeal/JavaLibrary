@@ -15,26 +15,28 @@ public class IntrinsicLockTest {
         TimeUnit.SECONDS.sleep(1);
         new Thread(() -> ilc.methodB(), "C").start();   // 最后输出，受线程A的影响，无法得到内置锁，只有当线程A执行完成以后才会执行
     }
+
+    static class IntrinsicLockClass {
+
+        public synchronized void methodA() {
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("methodA");
+        }
+
+        public synchronized void methodB() {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("methodB");
+        }
+    }
 }
 
 
-class IntrinsicLockClass {
 
-    public synchronized void methodA() {
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("methodA");
-    }
-
-    public synchronized void methodB() {
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("methodB");
-    }
-}

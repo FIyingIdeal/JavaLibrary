@@ -13,42 +13,44 @@ public class SynchronizedTest {
             new MyThread(String.valueOf(i)).start();
         }
     }
-}
 
-class Job {
+    static class Job {
 
-    private String jobName;
-    private static Object obj = new Object();
+        private String jobName;
+        private static Object obj = new Object();
 
-    public Job(String jobName) {
-        this.jobName = jobName;
+        public Job(String jobName) {
+            this.jobName = jobName;
+        }
+
+        //将synchronized加载方法声明上时(public synchronized void print())是相当于对当前对象加锁
+        public void print() {
+            synchronized (obj) {
+                System.out.println("start job " + this.jobName);
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.out.println("end job " + this.jobName);
+            }
+        }
     }
 
-    //将synchronized加载方法声明上时(public synchronized void print())是相当于对当前对象加锁
-    public void print() {
-        synchronized (obj) {
-            System.out.println("start job " + this.jobName);
-            try {
-                Thread.sleep(3000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            System.out.println("end job " + this.jobName);
+    static class MyThread extends Thread {
+
+        private String jobName;
+
+        public MyThread(String jobName) {
+            this.jobName = jobName;
+        }
+
+        @Override
+        public void run() {
+            Job job = new Job(jobName);
+            job.print();
         }
     }
 }
 
-class MyThread extends Thread {
 
-    private String jobName;
-
-    public MyThread(String jobName) {
-        this.jobName = jobName;
-    }
-
-    @Override
-    public void run() {
-        Job job = new Job(jobName);
-        job.print();
-    }
-}

@@ -12,6 +12,13 @@ import java.lang.reflect.Method;
  */
 public class MethodTest {
 
+    class MyMethod {
+
+        public void testMethod(@MethodParamaterAnnotation String param1, @MethodParamaterAnnotation String param2) {
+            //do nothing
+        }
+    }
+
     /**
      * {@link Method#getParameterAnnotations()}方法用来获取该method的所有参数的注解，返回是一个二维数组，每一个参数的注解是一个维度
      */
@@ -29,13 +36,6 @@ public class MethodTest {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-
     }
 }
 
-class MyMethod {
-
-    public void testMethod(@MethodParamaterAnnotation String param1, @MethodParamaterAnnotation String param2) {
-        //do nothing
-    }
-}

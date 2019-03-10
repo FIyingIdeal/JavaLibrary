@@ -1,8 +1,13 @@
 package test.java.nio.channels;
 
-import java.io.RandomAccessFile;
+import org.junit.Test;
+
+import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author yanchao
@@ -14,7 +19,7 @@ public class FileChannelTest {
      * FileChannel无法设置成非阻塞模式，且与SocketChannel不同的是，它没有无参的open()方法来获取FileChannel实例
      * 可以通过FileInputStream、FileOutputStream、RandomAccessFile对应的getChannel()方法来获取
      */
-
+    @Test
     public void test() {
         try (RandomAccessFile file = new RandomAccessFile("filepath.txt", "rw")) {
             //获取Channel:可以通过FileInputStream、FileOutputStream、RandomAccessFile来获取FileChannel实例
@@ -69,6 +74,26 @@ public class FileChannelTest {
             truncateFileChannel.close();
             channel.close();
         } catch (Exception e) {}
+    }
+
+    @Test
+    public void FileChannelAndBufferTest() {
+        CharBuffer charBuffer = CharBuffer.allocate(100);
+        Path path = Paths.get("G:/IDEAWorkspace/JavaLibrary/src/main/java/test/java/nio/channels/FileChannelTest.java");
+        int counter = 0;
+        try (FileReader reader = new FileReader(path.toFile());
+             PrintWriter writer = new PrintWriter(System.out)) {
+            while (reader.read(charBuffer) != -1) {
+                charBuffer.flip();
+                while (charBuffer.hasRemaining()) {
+                    writer.print(charBuffer.get());
+                }
+                charBuffer.clear();
+                System.out.println("=====counter is " + counter++ + "=======");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

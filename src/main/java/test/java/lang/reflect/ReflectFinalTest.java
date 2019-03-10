@@ -21,8 +21,8 @@ public class ReflectFinalTest {
 
     }
 
-}
+    static class ReflectFinal {
+        private final int i = 0;
+    }
 
-class ReflectFinal {
-    private final int i = 0;
 }

@@ -1,4 +1,4 @@
-package test.java.lang.ThreadTest.productorConsumer;
+package test.java.lang.ThreadTest.producerConsumer;
 
 import utils.PrintUtil;
 
@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * @author yanchao
  * @date 2019/3/10 10:13
- * 使用 {@link Object#wait()} 与 {@link Object#notify()} 实现的生产者消费者模型
+ * 使用 {@link Object#wait()} 与 {@link Object#notify()} 实现的 生产者-消费者 模型
  */
 public class NormalProducerConsumer {
 

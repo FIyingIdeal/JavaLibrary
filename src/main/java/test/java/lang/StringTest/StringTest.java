@@ -1,6 +1,7 @@
 package test.java.lang.StringTest;
 
 import org.junit.Test;
+import utils.PrintUtil;
 
 import java.util.*;
 
@@ -63,9 +64,25 @@ public class StringTest {
 
     @Test
     public void split() {
-        String num = "060101";
-        List<String> list = Arrays.asList(num.split(","));
+        String num = "   ab c  d   ";
+        List<String> list = Arrays.asList(num.trim().split("\\s+"));
         System.out.println(list);
+    }
+
+    /**
+     * trim() 会将字符串两边的空白字符去掉
+     */
+    @Test
+    public void trim() {
+        String s = "   ab c  d   ";
+        String trimStr = s.trim();
+        System.out.println(trimStr + "  " + trimStr.length());
+    }
+
+    @Test
+    public void tes1t() {
+        PrintUtil.println(Math.negateExact(1));
+        PrintUtil.println(Math.negateExact(-1));
     }
 
 }

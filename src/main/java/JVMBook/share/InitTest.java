@@ -22,6 +22,10 @@ public class InitTest {
         System.out.println("InitTest dynamic block");
     }
 
+    static {
+        System.out.println("InitTest static block");
+    }
+
     private C c1 = new C();
 
     public static void main(String[] args) {

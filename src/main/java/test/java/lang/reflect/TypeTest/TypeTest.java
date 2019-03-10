@@ -146,9 +146,10 @@ public class TypeTest <K extends Comparable<String> & Serializable, V> {
         System.out.println(wildcardTypeA);      //? extends java.lang.Number
         System.out.println(wildcardTypeB);      //? super java.lang.String
     }
+
+    class GenericArrayTypeTestClass<T> {
+        public void show(List<String>[] pTypeArray, T[] vTypeArray, List<String> list,
+                         String[] array, int[] ints) {}
+    }
 }
 
-class GenericArrayTypeTestClass<T> {
-    public void show(List<String>[] pTypeArray, T[] vTypeArray, List<String> list,
-                     String[] array, int[] ints) {}
-}

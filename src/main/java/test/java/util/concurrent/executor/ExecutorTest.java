@@ -167,4 +167,30 @@ public class ExecutorTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void RejectedExecutionHandler() {
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();
+        // 如果不指定 RejectedExecutionHandler 的话，默认是 AbortPolicy，会丢弃任务并抛出异常
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 2, 5, TimeUnit.SECONDS,
+                new ArrayBlockingQueue<Runnable>(3), handler);
+
+        for (int i = 0; i < 10; i++) {
+            executor.execute(() -> {
+                try {
+                    System.out.println("======" + Thread.currentThread().getName());
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
+        executor.shutdown();
+        try {
+            executor.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

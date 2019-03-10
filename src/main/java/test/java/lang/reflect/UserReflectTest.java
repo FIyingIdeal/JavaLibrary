@@ -8,18 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static utils.PrintUtil.print;
+import static utils.PrintUtil.println;
+
 /**
  * Created by Administrator on 2017/3/3.
  */
 public class UserReflectTest {
-
-    public void println(String outString) {
-        System.out.println(outString);
-    }
-
-    public void print(String outString) {
-        System.out.print(outString + ' ');
-    }
 
     //获取包名和类名
     @Test
@@ -51,7 +46,7 @@ public class UserReflectTest {
 
     //获取一个对象的父类与实现的接口
     @Test
-    public void getFuthersAndInterfaces() {
+    public void getFathersAndInterfaces() {
         Class<?> superClazz = User.class.getSuperclass();
         println("User的父类为：" + superClazz);
 
