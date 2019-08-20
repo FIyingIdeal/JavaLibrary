@@ -62,6 +62,25 @@ public class StringTest {
 
     }
 
+    /**
+     * format 特殊情况测试
+     * 1. 如果定义格式的时候没有占位符的话，String.format()后边可以跟多个参数，不会有影响；
+     * 2. 如果定义格式的时候有占位符的话，String.format()第二个参数起必须有足够的参数来对应 %s 的个数，不然会报异常，
+     *      参数超过占位符的数量无影响，但要保证参数类型与顺序问题
+     */
+    @Test
+    public void specialFormat() {
+        String str = "abc";
+        System.out.println(String.format(str, "ooo"));
+
+        // java.util.MissingFormatArgumentException: Format specifier '%s'
+        // str = "abc%sef%s";
+        // System.out.println(String.format(str, "d"));
+
+        str = "abc%s";
+        System.out.println(String.format(str, "efg", 1, "hij"));
+    }
+
     @Test
     public void split() {
         String num = "   ab c  d   ";

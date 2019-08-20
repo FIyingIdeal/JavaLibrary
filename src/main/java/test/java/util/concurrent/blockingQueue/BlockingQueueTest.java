@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.DelayQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Administrator on 2017/2/27.
- * 描述 ：BlockingQueue接口表示一个线程安放入和提取实例的队列
+ * @author  yanchao
+ * @date    2017/2/27
+ * 描述 ：BlockingQueue接口表示一个线程安全放入和提取实例的队列
  * 一般用法：通常用于一个线程生产对象，另一个线程消费这些对象的场景
  */
 public class BlockingQueueTest {
@@ -49,15 +49,4 @@ public class BlockingQueueTest {
         }
     }
 
-    @Test
-    public void DelayQueueTest() {
-        DelayQueue<DelayQueueElement> queue = new DelayQueue<>();
-        queue.put(new DelayQueueElement());
-        try {
-            System.out.println(queue.take());
-            System.out.println(queue.take());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }
