@@ -7,11 +7,15 @@ import org.junit.Test;
  */
 public class EnumTest {
 
-    // name() 方法用用来将一个enum实例转换为字符串
+    /**
+     * name() 方法用用来将一个enum实例转换为字符串
+     */
     @Test
     public void name() {
-        System.out.println(WeekEnum.Monday.name());             // Monday
-        System.out.println(WeekEnum.Monday.name().getClass());  // class java.lang.String
+        // Monday
+        System.out.println(WeekEnum.Monday.name());
+        // class java.lang.String
+        System.out.println(WeekEnum.Monday.name().getClass());
     }
 
     /**
@@ -21,5 +25,10 @@ public class EnumTest {
     public void valueOf() {
         System.out.println(Enum.valueOf(WeekEnum.class, "Monday"));
         System.out.println(Enum.valueOf(WeekEnum.class, "Monday").getCn_name());
+    }
+
+    @Test
+    public void ordinal() {
+        System.out.println(WeekEnum.Monday.ordinal());
     }
 }

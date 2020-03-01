@@ -4,6 +4,7 @@ import org.junit.Test;
 import utils.PrintUtil;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Created by Administrator on 2016/7/18.
@@ -102,6 +103,14 @@ public class StringTest {
     public void tes1t() {
         PrintUtil.println(Math.negateExact(1));
         PrintUtil.println(Math.negateExact(-1));
+    }
+
+    @Test
+    public void e() {
+        String e = "1";
+        IntStream.range(1,2).forEach(System.out::println);
+        char c = '0' + 0;
+        System.out.println(c);
     }
 
 }

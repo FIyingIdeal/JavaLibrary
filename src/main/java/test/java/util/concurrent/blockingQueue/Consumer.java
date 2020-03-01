@@ -3,7 +3,8 @@ package test.java.util.concurrent.blockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * Created by Administrator on 2017/2/27.
+ * @author  yanchao
+ * @date    2017/2/27
  */
 public class Consumer implements Runnable {
 

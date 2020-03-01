@@ -16,7 +16,7 @@ import java.util.concurrent.*;
  *     3. 存放消息的延迟队列；
  *
  * 其中第一条实现了 {@link Delayed} 接口的消息体需要重写两个方法：
- * {@link Delayed#compareTo(Object)}    决定插入延迟队列消息体在队列中的位置，这个一定要按照延迟时间来排序，否则可能造成到期的消息没有被立即消费的可能
+ * {@link Delayed#compareTo(Object)}    决定插入延迟队列消息体在队列中的位置，这个一定要按照延迟时间来排序（更准确说应该是执行时间点），否则可能造成到期的消息没有被立即消费的可能
  * {@link Delayed#getDelay(TimeUnit)}   决定消息的延迟时间。需要注意 unit.convert(sourceWaitTime, sourceWaitTimeUnit) 的时间单位，否则可能造成 CPU 的空转
  */
 public class DelayQueueTest {
@@ -53,12 +53,12 @@ public class DelayQueueTest {
          * 在向 {@link DelayQueue} 中插入数据时，相当于是向一个 {@code PriorityQueue} 优先级队列中插入数据，
          * 在插入的时候就会构造一个最大化堆或最小化堆
          * @param o     {@link DelayedElement}
-         * @return      比较延迟时间 {@link DelayedElement#delayMillis}，返回值可为 1  0  -1
+         * @return      比较执行时间 {@link DelayedElement#executeTimeMillis}，返回值可为 1  0  -1
          */
         @Override
         public int compareTo(Delayed o) {
             DelayedElement element = (DelayedElement) o;
-            return Long.compare(this.delayMillis, element.delayMillis);
+            return Long.compare(this.executeTimeMillis, element.executeTimeMillis);
         }
 
         /**
