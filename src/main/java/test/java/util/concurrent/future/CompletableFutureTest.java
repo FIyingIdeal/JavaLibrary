@@ -94,7 +94,7 @@ public class CompletableFutureTest {
         List<Task> tasks = getTaskList(10);
         ExecutorService threadPool = Executors.newFixedThreadPool(5);
         List<CompletableFuture<String>> taskList = tasks.stream()
-                // 使用 CompletableFuture.supplyAsync() 将任务转换为异步执行。还可以执行使用的线程池
+                // 使用 CompletableFuture.supplyAsync() 将任务转换为异步执行。还可以指定使用的线程池
                 .map(task -> CompletableFuture.supplyAsync(task::run, threadPool))
         // ---->thenApply 在这里～ 通过 thenApply 对 CompletableFuture<T> 中包含的值进行转换处理（Function(? super T, U)）
                 .map(future -> future.thenApply(String::toUpperCase)).collect(Collectors.toList());

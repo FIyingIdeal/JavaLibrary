@@ -117,9 +117,17 @@ public class ExecutorTest {
         System.out.println("It will execute 2s later");
         for (int i = 0; i < 5; i++) {
             // 延迟两秒钟在执行
-            //pool.schedule(new MyThread(), 2, TimeUnit.SECONDS);
+            pool.schedule(new MyThread(), 10, TimeUnit.SECONDS);
+
+            // 3s 后再添加下一个任务
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             // 延迟1s后每秒执行一次
-            pool.scheduleAtFixedRate(new MyThread(), 1, 1, TimeUnit.SECONDS);
+            // pool.scheduleAtFixedRate(new MyThread(), 1, 1, TimeUnit.SECONDS);
         }
 
         try {

@@ -8,17 +8,17 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Created by Administrator on 2017/4/26.
- */
-
-/**
  * PropertyDescriptor是描述对象属性相关信息的，类似如下形式
  * java.beans.PropertyDescriptor[name=age; propertyType=int; readMethod=public int test.java.beans.Person.getAge(); writeMethod=public void test.java.beans.Person.setAge(int)]
  * 可以获取  属性名  set方法  get方法
  *
  * 使用内省（Introspector）获取对象的BeanInfo信息，再通过BeanInfo获取属性的描述器（PropertyDescriptor），
  * 通过PropertyDescriptor可以获取到各个属性的getter/setter方法，之后利用反射执行getter/setter方法即可
+ *
+ * @author yanchao
+ * @date 2017/4/26.
  */
+
 public class PropertyDescriptorTest {
 
     public static void main(String[] args) {
