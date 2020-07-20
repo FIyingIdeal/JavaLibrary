@@ -3,10 +3,8 @@ package test.java.lang.ClassLoaderTest;
 import org.junit.Test;
 
 /**
- * Created by Administrator on 2017/7/13.
- */
-
-/**
+ * @author yanchao
+ * @date   2017/7/13
  * {@code AppClassLoader} OR {@code SystemClassLoader}
  * 负责在JVM启动时，加载来自命令java中的-classpath或者java.class.path系统属性或者CLASSPATH操作系统属所指定的JAR类包和类路径。
  * 调用 {@code ClassLoader.getSystemClassLoader()} 可以获取该类加载器。

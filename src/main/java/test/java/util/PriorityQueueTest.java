@@ -70,4 +70,5 @@ public class PriorityQueueTest {
             log.info("{}'s age is {}", person.name, person.age);
         }
     }
+
 }

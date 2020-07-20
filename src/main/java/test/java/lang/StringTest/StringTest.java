@@ -105,12 +105,65 @@ public class StringTest {
         PrintUtil.println(Math.negateExact(-1));
     }
 
+    /**
+     * {@link String#substring(int, int)} 第二个是 endIndex
+     * 在截取的是时候不会包含 endIndex 位置的字符
+     */
     @Test
-    public void e() {
-        String e = "1";
-        IntStream.range(1,2).forEach(System.out::println);
-        char c = '0' + 0;
-        System.out.println(c);
+    public void substring() {
+        String s =  "abcd";
+        System.out.println(s.substring(0, 2));
+    }
+
+    /**
+     * 注意，对于 "" 这个空字符串，是不存在 charAt(0) 的，否则报错：java.lang.StringIndexOutOfBoundsException: String index out of range: 0
+     * "" 的长度为 0
+     */
+    @Test
+    public void charAt() {
+        String s = "abcd";
+        System.out.println(s.charAt(s.length() - 1));
+
+        s = "";
+        System.out.println(s.charAt(0));
+    }
+
+    /**
+     * {@link String#contains(CharSequence)} 判断是否包含某个子字符串，不论位置在哪儿
+     */
+    @Test
+    public void contains() {
+        String s1 = "abcd";
+        String s2 = "cd";
+        System.out.println(s1.contains(s2));
+    }
+
+    /**
+     * {@link String#startsWith(String)} 判断字符串是否以某一个字符串开头
+     */
+    @Test
+    public void startsWith() {
+        String s1 = "sss";
+        System.out.println(s1.startsWith("ss"));
+    }
+
+    /**
+     * String 字符串可以直接拼接一个 char 类型的字符，形成一个新的字符串（与拼接数字是一个道理）
+     * {@link String#concat(String)} 用于拼接字符串形成新的字符串，参数类型只能是 String
+     */
+    @Test
+    public void concat() {
+        String s1 = "abb";
+        s1 = s1 + 'd';
+        System.out.println(s1);
+        s1 = s1.concat("g");
+        System.out.println(s1);
+    }
+
+    @Test
+    public void indexOf() {
+        String s1 = "";
+        System.out.println(s1.indexOf(""));
     }
 
 }
