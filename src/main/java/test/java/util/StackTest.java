@@ -32,12 +32,4 @@ public class StackTest {
         stack.push('s');
         System.out.println(stack.peek());
     }
-
-    static {
-        i = 0;
-    }
-    static int i = 1;
-    public static void main(String[] args) {
-        System.out.println(i);
-    }
 }

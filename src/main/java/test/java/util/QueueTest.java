@@ -54,5 +54,10 @@ public class QueueTest {
         peek();
     }
 
+    public void isEmpty() {
+        offer();
+        this.queue.isEmpty();
+    }
+
 
 }
