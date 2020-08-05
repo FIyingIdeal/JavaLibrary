@@ -1,5 +1,7 @@
 package test.java.util.ServiceLoaderTest;
 
+import sun.reflect.Reflection;
+
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
@@ -15,11 +17,16 @@ import java.util.ServiceLoader;
 public class ServiceLoaderTest {
 
     public static void main(String[] args) {
+        System.out.println("ServiceLoader's classLoader is " + ServiceLoader.class.getClassLoader());
+        System.out.println("Hello's classLoader is " + Hello.class.getClassLoader());
         ServiceLoader<Hello> serviceLoader = ServiceLoader.load(Hello.class);
         Iterator<Hello> iterator = serviceLoader.iterator();
         while (iterator.hasNext()) {
             Hello hello = iterator.next();
             System.out.println(hello.sayHello("Java"));
         }
+
+        Class<?> reflection = Reflection.getCallerClass(2);
+        System.out.println(reflection);
     }
 }
