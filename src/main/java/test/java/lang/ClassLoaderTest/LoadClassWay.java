@@ -2,7 +2,7 @@ package test.java.lang.ClassLoaderTest;
 
 /**
  * 加载类的几种方式：
- *      1. JVM 初始化是加载；
+ *      1. JVM 初始化时加载；
  *      2. 通过 {@link Class#forName(String)} 及其重载方法加载；
  *      3. 通过 {@link ClassLoader#loadClass(String)} 加载，但这样会破坏双亲委派模型；
  *

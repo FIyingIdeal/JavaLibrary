@@ -54,7 +54,6 @@ public class ZeroOnePackageWithValue {
             }
         }
         System.out.println();
-
         System.out.println(Arrays.toString(states[n - 1]));
         int maxValue = 0;
         for (int j = 0; j <= w; j++) {
@@ -104,6 +103,51 @@ public class ZeroOnePackageWithValue {
         return maxValue;
     }
 
+    private int knapsack20200814(int[] weight, int[] value, int w) {
+        if (weight == null || weight.length == 0) {
+            return 0;
+        }
+        int n = weight.length;
+        int[][] dp = new int[n][w + 1];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= w; j++) {
+                dp[i][j] = -1;
+            }
+        }
+
+        dp[0][0] = 0;
+        if (weight[0] <= w) {
+            dp[0][weight[0]] = value[0];
+        }
+
+        for (int i = 1; i < n; i++) {
+            // 第 i 个物品不放入
+            for (int j = 0; j <= w; j++) {
+                if (dp[i-1][j] >= 0) {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+
+            for (int j = 0; j <= w; j++) {
+                if (dp[i-1][j] >= 0 && j + weight[i] <= w) {
+                    if (dp[i-1][j] + value[i] > dp[i][j + weight[i]]) {
+                        dp[i][j + weight[i]] = dp[i-1][j] + value[i];
+                    }
+                }
+            }
+        }
+
+        int maxValue = 0;
+        for (int j = 0; j <= w; j++) {
+            if (dp[n - 1][j] > maxValue) {
+                maxValue = dp[n-1][j];
+                totalWeight = j;
+            }
+        }
+        return maxValue;
+    }
+
     private int totalWeight = 0;
     public static void main(String[] args) {
         int[] weight = {2,2,4,6,3};
@@ -115,6 +159,9 @@ public class ZeroOnePackageWithValue {
         System.out.println("max value is " + maxValue + ", total weight is " + z.totalWeight);
 
         maxValue = z.knapsack4(weight, value, n, w);
+        System.out.println("max value is " + maxValue + ", total weight is " + z.totalWeight);
+
+        maxValue = z.knapsack20200814(weight, value, w);
         System.out.println("max value is " + maxValue + ", total weight is " + z.totalWeight);
     }
 }

@@ -8,7 +8,7 @@ import org.apache.commons.lang.ArrayUtils;
  */
 abstract class BaseSort {
 
-    private static int[] sortArray = {9,2,3,6,1,7,8,5,4};
+    private static int[] sortArray = {9,2,3,6,1,7,8,5,4,9};
 
     static int[] originalArray() {
         int[] originalArrayCopy = new int[sortArray.length];

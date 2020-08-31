@@ -1,6 +1,5 @@
 package test.java.util;
 
-import org.apache.hadoop.yarn.webapp.hamlet.Hamlet;
 import org.junit.Test;
 
 import java.util.Stack;
@@ -11,6 +10,9 @@ import java.util.Stack;
  */
 public class StackTest {
 
+    /**
+     * {@link Stack#push(Object)} 元素入栈
+     */
     @Test
     public void push() {
         Stack<Integer> stack = new Stack<>();
@@ -26,6 +28,22 @@ public class StackTest {
         }
     }
 
+    /**
+     * {@link Stack#pop()} 元素出栈
+     */
+    @Test
+    public void pop() {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.isEmpty());
+    }
+
+    /**
+     * {@link Stack#peek()} 从栈顶获取一个元素，但不移除，与 pop() 不一样
+     */
     @Test
     public void peek() {
         Stack<Character> stack = new Stack<>();

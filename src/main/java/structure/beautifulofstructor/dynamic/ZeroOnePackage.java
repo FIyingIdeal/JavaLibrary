@@ -98,14 +98,52 @@ public class ZeroOnePackage {
         return 0;
     }
 
+    private int knapsack20200814(int[] weight, int w) {
+        if (weight == null || weight.length == 0) {
+            return 0;
+        }
+        int n = weight.length;
+        // w + 1 是因为 0 - w 共 w+1 个数
+        boolean[][] dp = new boolean[n][w + 1];
+        dp[0][0] = true;
+        if (weight[0] <= w) {
+            dp[0][weight[0]] = true;
+        }
+        for (int i = 1; i < n; i++) {
+            // 第 i 个物品不放入
+            for (int j = 0; j <= w; j++) {
+                if (dp[i-1][j]) {
+                    dp[i][j] = true;
+                }
+            }
+            // 第 i 个物品放入
+            for (int j = 0; j <= w; j++) {
+                // weight[i] + j <= w 可以作为 for 循环的判读条件( j <= w - weight[i])，提升效率，但写成这样方便理解
+                if (dp[i-1][j] && weight[i] + j <= w) {
+                    dp[i][j + weight[i]] = true;
+                }
+            }
+        }
+
+        for (int i = w; i >= 0; i--) {
+            if (dp[n - 1][i]) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         int[] weight = {2,2,4,6,10};
         int n = weight.length;
         int w = 9;
-        int maxWeight = new ZeroOnePackage().knapsack(weight, n, w);
-        int maxWeight1 = new ZeroOnePackage().knapsack1(weight, n, w);
+        ZeroOnePackage zeroOnePackage = new ZeroOnePackage();
+        int maxWeight = zeroOnePackage.knapsack(weight, n, w);
+        int maxWeight1 = zeroOnePackage.knapsack1(weight, n, w);
+        int maxWeight2 = zeroOnePackage.knapsack20200814(weight, w);
         System.out.println("max weight is " + maxWeight);
         System.out.println("max weight is " + maxWeight1);
+        System.out.println("max weight is " + maxWeight2);
     }
 
 }

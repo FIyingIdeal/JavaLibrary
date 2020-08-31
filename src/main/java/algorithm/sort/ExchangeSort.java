@@ -35,6 +35,23 @@ public class ExchangeSort extends BaseSort {
         printArray(sortArray);
     }
 
+
+    @Test
+    public void bubbleSort20208080() {
+        int[] sortArray = originalArray();
+        printArray(sortArray);
+        for (int i = 0; i < sortArray.length - 1; i++) {
+            for (int j = 0; j < sortArray.length - i - 1; j++) {
+                if (sortArray[j] > sortArray[j+1]) {
+                    int temp = sortArray[j];
+                    sortArray[j] = sortArray[j+1];
+                    sortArray[j+1] = temp;
+                }
+            }
+        }
+        printArray(sortArray);
+    }
+
     /**
      * 快速排序
      *
@@ -79,6 +96,74 @@ public class ExchangeSort extends BaseSort {
         sortArray[low] = temp;
         return low;
     }
+
+
+
+    @Test
+    public void quickSort20200808() {
+        int[] sortArray = originalArray();
+        printArray(sortArray);
+        quickSort20200808(sortArray);
+        printArray(sortArray);
+        int searchIndex = search(sortArray, 13);
+        System.out.println("search index is " + searchIndex);
+    }
+
+    private void quickSort20200808(int[] array) {
+        quickSort20200826(array, 0, array.length - 1);
+    }
+
+    private void quickSort20200826(int[] array, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int divide = divide20200826(array, left, right);
+        quickSort20200826(array, left, divide - 1);
+        quickSort20200826(array, divide + 1, right);
+    }
+
+    private int divide20200826(int[] array, int left, int right) {
+        int temp = array[left];
+        while (left != right) {
+            while (array[right] > temp && left != right) {
+                right--;
+            }
+            if (left != right) {
+                array[left] = array[right];
+                left++;
+            }
+            while (array[left] < temp && left != right) {
+                left++;
+            }
+            if (left != right) {
+                array[right] = array[left];
+                right--;
+            }
+        }
+        array[left] = temp;
+        return left;
+    }
+
+
+
+    private int search(int[] array, int num) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+        int low = 0, high = array.length - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (array[mid] == num) {
+                return mid;
+            } else if (array[mid] > num) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
+
 }
 
 
