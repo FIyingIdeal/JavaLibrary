@@ -123,6 +123,26 @@ public class ExchangeSort extends BaseSort {
     }
 
     private int divide20200826(int[] array, int left, int right) {
+        /*int temp = array[left];
+        while (left != right) {
+            while (array[right] > temp && left != right) {
+                right--;
+            }
+            if (left != right) {
+                array[left] = array[right];
+                left++;
+            }
+            while (array[left] < temp && left != right) {
+                left++;
+            }
+            if (left != right) {
+                array[right] = array[left];
+                right--;
+            }
+        }
+        array[left] = temp;
+        return left;*/
+
         int temp = array[left];
         while (left != right) {
             while (array[right] > temp && left != right) {

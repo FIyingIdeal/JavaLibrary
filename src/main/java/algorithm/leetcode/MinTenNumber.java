@@ -1,5 +1,6 @@
 package algorithm.leetcode;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -67,9 +68,8 @@ public class MinTenNumber {
 
 
     public static void priorityMethod(int[] a) {
-
         Comparator<Integer> comparator = (i1, i2) -> i2 - i1;
-        PriorityQueue<Integer> queue = new PriorityQueue<>(11, comparator);
+        PriorityQueue<Integer> queue = new PriorityQueue<>(comparator);
 
         for (int i = 0; i < find; i++) {
             queue.offer(a[i]);
@@ -83,7 +83,11 @@ public class MinTenNumber {
             queue.offer(a[i]);
         }
 
-        queue.forEach(item -> System.out.println(item + ", "));
+        int[] a1 = new int[find];
+        for (int i = find - 1; i >= 0; i--) {
+            a1[i] = queue.poll();
+        }
+        Arrays.stream(a1).forEach(System.out::print);
     }
 
     public static void main(String[] args) {
